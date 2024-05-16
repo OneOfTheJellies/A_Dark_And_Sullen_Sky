@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://bdbfeqm0w0j6d"]
+
+[ext_resource type="Script" path="res://biterBeetle.gd" id="1_yxkec"]
+[ext_resource type="Texture2D" uid="uid://daycmd4ktf0s5" path="res://Test project/banana.png" id="2_6m7uo"]
+[ext_resource type="Script" path="res://Test project/Damagable.gd" id="4_5qvd6"]
+[ext_resource type="Script" path="res://Test project/Gravity.gd" id="4_rvlod"]
+[ext_resource type="Script" path="res://Test project/Targeting.gd" id="5_3hi1k"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yymfy"]
+radius = 12.0
+height = 24.0
+
+[node name="biterBeetle" type="CharacterBody2D"]
+script = ExtResource("1_yxkec")
+
+[node name="Banana" type="Sprite2D" parent="."]
+texture = ExtResource("2_6m7uo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -2)
+shape = SubResource("CapsuleShape2D_yymfy")
+
+[node name="Gravity" type="Node" parent="."]
+script = ExtResource("4_rvlod")
+
+[node name="Damageable" type="Node" parent="." node_paths=PackedStringArray("parent")]
+script = ExtResource("4_5qvd6")
+parent = NodePath("..")
+
+[node name="Targetable" type="Node" parent="."]
+
+[node name="Targeting" type="Node" parent="."]
+script = ExtResource("5_3hi1k")
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="."]

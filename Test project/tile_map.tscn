@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0vqhc0tohd0q"]
+
+[ext_resource type="TileSet" path="C:\Users\Student\Desktop\Bryn\Other\A Ghost Story\Sprite saves\PNGs" id="1_r6va7"]
+
+[node name="TileMap" type="TileMap"]
+tile_set = ExtResource("1_r6va7")
+format = 2

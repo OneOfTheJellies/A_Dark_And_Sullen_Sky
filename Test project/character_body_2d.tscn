@@ -1,0 +1,63 @@
+[gd_scene load_steps=11 format=3 uid="uid://dyce763tpvejl"]
+
+[ext_resource type="Script" path="res://Test project/Player.gd" id="1_ea58r"]
+[ext_resource type="Texture2D" uid="uid://bny38bm0v7rjo" path="res://Player_side_red_cloak_float.png" id="2_akxi7"]
+[ext_resource type="Script" path="res://Test project/playerCamera.gd" id="2_bxq0w"]
+[ext_resource type="Texture2D" uid="uid://dfdcapy4coyk3" path="res://Player_side_red_cloak.png" id="2_vduk2"]
+[ext_resource type="Texture2D" uid="uid://cykw5s0r0pgaw" path="res://Test project/Player_side_red_ cloak_running/Player_side_red_cloak_running2.png" id="3_3ssei"]
+[ext_resource type="Texture2D" uid="uid://bm0ridhxuvq34" path="res://Test project/Player_side_red_ cloak_running/Player_side_red_cloak_running1.png" id="4_n47rm"]
+[ext_resource type="Texture2D" uid="uid://ssuk010gcan0" path="res://Test project/Player_side_red_ cloak_running/Player_side_red_cloak_running3.png" id="4_xlx4i"]
+[ext_resource type="Texture2D" uid="uid://dxb0cuvl3fs8m" path="res://Test project/Player_side_red_ cloak_running/Player_side_red_cloak_running4.png" id="5_8nni8"]
+[ext_resource type="Texture2D" uid="uid://tcu1vrtqdecn" path="res://Test project/Player_side_red_ cloak_running/Player_side_red_cloak_running5.png" id="6_boxur"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mjict"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_akxi7")
+}],
+"loop": true,
+"name": &"float",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_vduk2")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_n47rm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_3ssei")
+}, {
+"duration": 4.0,
+"texture": ExtResource("4_xlx4i")
+}, {
+"duration": 2.0,
+"texture": ExtResource("5_8nni8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_boxur")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 12.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_ea58r")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-8, -12, -8, 16, 8, 16, 8, -12, 0, -12)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("2_bxq0w")
+
+[node name="PlayerAnimations" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_mjict")
+animation = &"float"
