@@ -1,14 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdbfeqm0w0j6d"]
+[gd_scene load_steps=8 format=3 uid="uid://bdbfeqm0w0j6d"]
 
 [ext_resource type="Script" path="res://biterBeetle.gd" id="1_yxkec"]
 [ext_resource type="Texture2D" uid="uid://daycmd4ktf0s5" path="res://Test project/banana.png" id="2_6m7uo"]
 [ext_resource type="Script" path="res://Test project/Damagable.gd" id="4_5qvd6"]
 [ext_resource type="Script" path="res://Test project/Gravity.gd" id="4_rvlod"]
-[ext_resource type="Script" path="res://Test project/Targeting.gd" id="5_3hi1k"]
+[ext_resource type="Script" path="res://Test project/stateMachine_biterBeetle.gd" id="5_5kypk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yymfy"]
-radius = 12.0
-height = 24.0
+radius = 16.0
+height = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aub6w"]
+radius = 480.0
 
 [node name="biterBeetle" type="CharacterBody2D"]
 script = ExtResource("1_yxkec")
@@ -17,7 +20,6 @@ script = ExtResource("1_yxkec")
 texture = ExtResource("2_6m7uo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2, -2)
 shape = SubResource("CapsuleShape2D_yymfy")
 
 [node name="Gravity" type="Node" parent="."]
@@ -29,7 +31,13 @@ parent = NodePath("..")
 
 [node name="Targetable" type="Node" parent="."]
 
-[node name="Targeting" type="Node" parent="."]
-script = ExtResource("5_3hi1k")
+[node name="stateMachine_biterBeetle" type="Node" parent="."]
+script = ExtResource("5_5kypk")
 
-[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+[node name="Tageting area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tageting area"]
+shape = SubResource("CircleShape2D_aub6w")
+
+[connection signal="body_entered" from="Tageting area" to="stateMachine_biterBeetle" method="_on_tageting_area_body_entered"]
+[connection signal="body_exited" from="Tageting area" to="stateMachine_biterBeetle" method="_on_tageting_area_body_exited"]
