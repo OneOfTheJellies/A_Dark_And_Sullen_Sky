@@ -1,10 +1,10 @@
 extends Node
 
-var state : String
+var state : String = "idle"
 
 #Targeting
 var possibleTargets : Array
-var target : Vector2
+var target : CharacterBody2D
 var destination : Vector2
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,6 +15,11 @@ func _ready():
 func _process(delta):
 	if state == "idle":
 		idleProcess()
+	
+
+func idleProcess():
+	if target == null:
+		lookForTarget()
 
 #  when someting enters the targeting area, this adds it to a list of targets 
 #  to test line of sight to. The second function deletes it if it leaves.
@@ -25,11 +30,27 @@ func _on_tageting_area_body_entered(body):
 			isTargetable = true
 	if isTargetable:
 		possibleTargets.append(body)
-		print(possibleTargets)
 
 func _on_tageting_area_body_exited(body):
 	if possibleTargets.has(body):
 		possibleTargets.erase(body)
 
-func idleProcess():
-	pass
+func lookForTarget():
+	var bestTarget
+	var bestTargetDistance = 0.0
+	for testTarget in possibleTargets:
+		if lookForSight(testTarget):
+			if get_parent().global_position.distance_to(testTarget.global_position) > bestTargetDistance:
+				bestTarget = testTarget
+		print(bestTarget)
+	target = bestTarget
+
+func lookForSight(thingToSee):
+	var space_state = get_parent().get_world_2d().direct_space_state
+	var query = PhysicsRayQueryParameters2D.create(get_parent().global_position, thingToSee.global_position)
+	query.exclude = [self]
+	var result = space_state.intersect_ray(query)
+	if result.get('collider') == thingToSee:
+		return true
+	else:
+		return false
