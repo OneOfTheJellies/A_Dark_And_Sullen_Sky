@@ -1,6 +1,7 @@
 extends Node
 
 var state : String = "idle"
+var homeScene : Vector2
 
 #Targeting
 var possibleTargets : Array
@@ -13,14 +14,25 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if target:
+		state = "attack"
+	else:
+		state = "idle"
 	if state == "idle":
 		idleProcess()
+	if state == "attack":
+		attackProcess()
 	
 
 func idleProcess():
-	if target == null:
+	if !target:
 		lookForTarget()
+	if !target and !destination:
+		pass
 
+func attackProcess():
+	if get_parent().position.distance_to(target.global_position) < get_parent().jumpDist:
+		get_parent().jumpAttack(target.global_position)
 #  when someting enters the targeting area, this adds it to a list of targets 
 #  to test line of sight to. The second function deletes it if it leaves.
 func _on_tageting_area_body_entered(body):
@@ -42,7 +54,6 @@ func lookForTarget():
 		if lookForSight(testTarget):
 			if get_parent().global_position.distance_to(testTarget.global_position) > bestTargetDistance:
 				bestTarget = testTarget
-		print(bestTarget)
 	target = bestTarget
 
 func lookForSight(thingToSee):
