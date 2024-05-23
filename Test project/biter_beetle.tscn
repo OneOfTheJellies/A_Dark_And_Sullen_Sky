@@ -1,10 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdbfeqm0w0j6d"]
+[gd_scene load_steps=25 format=3 uid="uid://bdbfeqm0w0j6d"]
 
 [ext_resource type="Script" path="res://biterBeetle.gd" id="1_yxkec"]
-[ext_resource type="Texture2D" uid="uid://daycmd4ktf0s5" path="res://Test project/banana.png" id="2_6m7uo"]
+[ext_resource type="Texture2D" uid="uid://dcu3ytnsav703" path="res://Test project/biterBeetle/attack/Biter_beetle_attack8.png" id="2_gcy4q"]
 [ext_resource type="Script" path="res://Test project/Damagable.gd" id="4_5qvd6"]
 [ext_resource type="Script" path="res://Test project/Gravity.gd" id="4_rvlod"]
 [ext_resource type="Script" path="res://Test project/stateMachine_biterBeetle.gd" id="5_5kypk"]
+[ext_resource type="Texture2D" uid="uid://ehf7duufiyae" path="res://Test project/biterBeetle/walk/Biter_beetle_walk1.png" id="6_0eu1u"]
+[ext_resource type="Texture2D" uid="uid://cpkt021hqr4u3" path="res://Test project/biterBeetle/walk/Biter_beetle_walk2.png" id="7_pomo8"]
+[ext_resource type="Texture2D" uid="uid://dy2j782sfgubs" path="res://Test project/biterBeetle/walk/Biter_beetle_walk3.png" id="8_nqhso"]
+[ext_resource type="Texture2D" uid="uid://cuqce70h1iuyq" path="res://Test project/biterBeetle/attack/Biter_beetle_attack1.png" id="9_mag0j"]
+[ext_resource type="Texture2D" uid="uid://bugoiuptri7ib" path="res://Test project/biterBeetle/attack/Biter_beetle_attack2.png" id="10_o2iah"]
+[ext_resource type="Texture2D" uid="uid://cx43agfud24vc" path="res://Test project/biterBeetle/attack/Biter_beetle_attack3.png" id="11_egwvs"]
+[ext_resource type="Texture2D" uid="uid://bmftioi5kdyvh" path="res://Test project/biterBeetle/attack/Biter_beetle_attack4.png" id="12_2j802"]
+[ext_resource type="Texture2D" uid="uid://dgv063gfvphbr" path="res://Test project/biterBeetle/attack/Biter_beetle_attack5.png" id="13_bgst3"]
+[ext_resource type="Texture2D" uid="uid://dmuawdgfiyrfv" path="res://Test project/biterBeetle/attack/Biter_beetle_attack6.png" id="14_otgyg"]
+[ext_resource type="Texture2D" uid="uid://bkv7nhep83xya" path="res://Test project/biterBeetle/attack/Biter_beetle_attack7.png" id="15_6rwke"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yymfy"]
 radius = 16.0
@@ -13,11 +23,81 @@ height = 32.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_aub6w"]
 radius = 480.0
 
+[sub_resource type="Animation" id="Animation_x0int"]
+resource_name = "walk"
+length = 0.30001
+loop_mode = 1
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../biterBeetleSkin:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("6_0eu1u"), ExtResource("7_pomo8"), ExtResource("8_nqhso")]
+}
+
+[sub_resource type="Animation" id="Animation_b2lwj"]
+resource_name = "jumpCharge"
+length = 1.20002
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../biterBeetleSkin:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("9_mag0j"), ExtResource("10_o2iah"), ExtResource("11_egwvs"), ExtResource("12_2j802"), ExtResource("13_bgst3"), ExtResource("14_otgyg")]
+}
+
+[sub_resource type="Animation" id="Animation_p8axv"]
+resource_name = "jumpAttack"
+length = 0.20001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../biterBeetleSkin:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("15_6rwke"), ExtResource("2_gcy4q")]
+}
+
+[sub_resource type="Animation" id="Animation_7y8cv"]
+resource_name = "jumpEnd"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l383a"]
+_data = {
+"jumpAttack": SubResource("Animation_p8axv"),
+"jumpCharge": SubResource("Animation_b2lwj"),
+"jumpEnd": SubResource("Animation_7y8cv"),
+"walk": SubResource("Animation_x0int")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xhxe3"]
+animation = &"jumpCharge"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_qcbi0"]
+graph_offset = Vector2(-415.1, 117.2)
+nodes/jump/node = SubResource("AnimationNodeAnimation_xhxe3")
+nodes/jump/position = Vector2(100, 200)
+
 [node name="biterBeetle" type="CharacterBody2D"]
 script = ExtResource("1_yxkec")
 
-[node name="Banana" type="Sprite2D" parent="."]
-texture = ExtResource("2_6m7uo")
+[node name="biterBeetleSkin" type="Sprite2D" parent="."]
+texture = ExtResource("2_gcy4q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_yymfy")
@@ -38,6 +118,20 @@ script = ExtResource("5_5kypk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tageting area"]
 shape = SubResource("CircleShape2D_aub6w")
+
+[node name="biterBeetleAnimations" type="AnimationPlayer" parent="."]
+root_node = NodePath("../stateMachine_biterBeetle")
+libraries = {
+"": SubResource("AnimationLibrary_l383a")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../stateMachine_biterBeetle")
+libraries = {
+"": SubResource("AnimationLibrary_l383a")
+}
+tree_root = SubResource("AnimationNodeBlendTree_qcbi0")
+anim_player = NodePath("../biterBeetleAnimations")
 
 [connection signal="body_entered" from="Tageting area" to="stateMachine_biterBeetle" method="_on_tageting_area_body_entered"]
 [connection signal="body_exited" from="Tageting area" to="stateMachine_biterBeetle" method="_on_tageting_area_body_exited"]
