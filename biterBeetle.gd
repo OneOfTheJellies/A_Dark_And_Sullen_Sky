@@ -5,7 +5,7 @@ const speed = 300.0
 const health = 3
 
 # stuff for jumping
-const jumpSpeed = 8
+const jumpSpeed = 80
 const jumpDist = 100
 var jumpTarget
 var isJumping
@@ -26,23 +26,27 @@ func handleJump(delta):
 	if position.distance_to(jumpTarget) > 10:
 		velocity = position.direction_to(jumpTarget) * minf(speed, position.distance_to(jumpTarget))
 	else:
-		$biterBeetleAnimations.play()
+		$biterBeetleAnimations.play("attack")
 		isJumping = false
 
 func jumpAttack(targetLocation):
 	jumpTarget = targetLocation
-	if position.distance_to(targetLocation) > jumpSpeed:
-		var max_speed = (position.distance_to(targetLocation) / getdelta)
-		velocity = position.direction_to(targetLocation) * minf(speed, max_speed)
+	$biterBeetleAnimations.play("attack")
 
 func walkTowards(xspot,yspot):
 	pass
 
 # jump functions
 func beginJump():
-	rotation = position.angle_to(jumpTarget.position)
+	$biterBeetleSkin.rotation = position.angle_to(jumpTarget)
 	isJumping = true
-	$biterBeetleAnimations.play("attack")
 
 func stopJumpAnim():
 	$biterBeetleAnimations.pause()
+
+func endJumpAnim():
+	isJumping = false
+	jumpTarget = null
+
+func on8():
+	print(1)

@@ -32,7 +32,8 @@ func idleProcess():
 
 func attackProcess():
 	if get_parent().position.distance_to(target.global_position) < get_parent().jumpDist and get_parent().is_on_floor():
-		get_parent().jumpAttack(target.global_position)
+		if lookForSight(target):
+			get_parent().jumpAttack(target.global_position)
 #  when someting enters the targeting area, this adds it to a list of targets 
 #  to test line of sight to. The second function deletes it if it leaves.
 func _on_tageting_area_body_entered(body):
