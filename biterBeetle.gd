@@ -9,6 +9,7 @@ const jumpSpeed = 80
 const jumpDist = 100
 var jumpTarget
 var isJumping
+var jumpInactive = true
 
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -26,13 +27,12 @@ func handleJump(delta):
 	if position.distance_to(jumpTarget) > 10:
 		velocity = position.direction_to(jumpTarget) * minf(speed, position.distance_to(jumpTarget))
 	else:
-		print(1)
 		$biterBeetleAnimations.play("attack")
 		isJumping = false
 
 func jumpAttack(targetLocation):
 	jumpTarget = targetLocation
-	$biterBeetleAnimations.play("attack")
+	$biterBeetleAnimations.play("attack",8)
 
 func walkTowards(xspot,yspot):
 	pass
@@ -41,13 +41,11 @@ func walkTowards(xspot,yspot):
 func beginJump():
 	$biterBeetleSkin.rotation = position.angle_to(jumpTarget)
 	isJumping = true
+	jumpInactive = false
 
 func stopJumpAnim():
 	$biterBeetleAnimations.pause()
 
 func endJumpAnim():
-	isJumping = false
-	jumpTarget = null
-
-func on8():
-	print(1)
+	velocity = Vector2(0,0)
+	jumpInactive = true
