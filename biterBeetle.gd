@@ -26,6 +26,7 @@ func handleJump(delta):
 	if position.distance_to(jumpTarget) > 10:
 		velocity = position.direction_to(jumpTarget) * minf(speed, position.distance_to(jumpTarget))
 	else:
+		print(1)
 		$biterBeetleAnimations.play("attack")
 		isJumping = false
 

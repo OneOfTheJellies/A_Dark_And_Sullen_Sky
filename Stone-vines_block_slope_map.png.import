@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xsft06j24a8t"
-path="res://.godot/imported/BETTERBEETLE.png-f2d4b6abdb15d5d254861e35bdd1f51d.ctex"
+uid="uid://bsjdfbhjo0tsg"
+path="res://.godot/imported/Stone-vines_block_slope_map.png-74fbdb3828697bd38b1a56ce0b4fc833.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BETTERBEETLE.png"
-dest_files=["res://.godot/imported/BETTERBEETLE.png-f2d4b6abdb15d5d254861e35bdd1f51d.ctex"]
+source_file="res://Stone-vines_block_slope_map.png"
+dest_files=["res://.godot/imported/Stone-vines_block_slope_map.png-74fbdb3828697bd38b1a56ce0b4fc833.ctex"]
 
 [params]
 
