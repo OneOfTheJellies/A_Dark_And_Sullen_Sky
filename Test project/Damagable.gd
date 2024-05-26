@@ -3,9 +3,8 @@ extends Node
 var health =  0
 
 func _ready():
-	health = parent.getHealth()
-	print(health)
-	
+	health = get_parent().health
+
 func getHit(damage):
 	health -= damage
 

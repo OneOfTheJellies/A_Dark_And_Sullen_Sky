@@ -9,5 +9,5 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if not get_parent().is_on_floor():
-		get_parent().velocity.y += gravity
+	if !get_parent().is_on_floor():
+		get_parent().velocity.y += gravity * delta
