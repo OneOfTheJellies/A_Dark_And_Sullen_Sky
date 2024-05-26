@@ -18,8 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://cd7rxpc7l13wb" path="res://Test project/biterBeetle/attack/Biter_beetle_attack9.png" id="16_046ff"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yymfy"]
-radius = 16.0
-height = 32.0
+radius = 14.0
+height = 44.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_aub6w"]
 radius = 480.0
@@ -128,9 +128,11 @@ _data = {
 script = ExtResource("1_yxkec")
 
 [node name="biterBeetleSkin" type="Sprite2D" parent="."]
-texture = ExtResource("16_046ff")
+texture = ExtResource("9_mag0j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 10)
+rotation = 1.57079
 shape = SubResource("CapsuleShape2D_yymfy")
 
 [node name="Gravity" type="Node" parent="."]
@@ -155,6 +157,11 @@ root_node = NodePath("../stateMachine_biterBeetle")
 libraries = {
 "": SubResource("AnimationLibrary_l383a")
 }
+
+[node name="attackArea" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="attackArea"]
+polygon = PackedVector2Array(-22, 18, -22, 0, -32, 0, -32, 18)
 
 [connection signal="body_entered" from="Tageting area" to="stateMachine_biterBeetle" method="_on_tageting_area_body_entered"]
 [connection signal="body_exited" from="Tageting area" to="stateMachine_biterBeetle" method="_on_tageting_area_body_exited"]
