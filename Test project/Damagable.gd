@@ -7,6 +7,6 @@ func _ready():
 
 func getHit(damage):
 #	health -= damage
-
+	print(1)
 #	if health <= 0:
 	get_parent().die()

@@ -5,8 +5,8 @@ const speed = 300.0
 const health = 3
 
 # stuff for jumping
-const jumpSpeed = 80
-const jumpDist = 100
+const jumpSpeed = 1800
+const jumpDist = 200
 var jumpTarget
 var isJumping
 var jumpInactive = true
@@ -20,7 +20,7 @@ var getdelta
 func _physics_process(delta):
 	getdelta = delta
 	if isJumping:
-		handleAttack
+		handleAttack()
 		handleJump(delta)
 
 	move_and_slide()
@@ -32,11 +32,11 @@ func handleAttack():
 			if child.name == "Damageable":
 				viable = true
 		if viable == true:
-			possibleTarget.damageable.getHit(1)
+			possibleTarget.find_child("Damageable").getHit(1)
 
 func handleJump(delta):
 	if position.distance_to(jumpTarget) > 10 and !hitWithAttack:
-		velocity = position.direction_to(jumpTarget) * minf(speed, position.distance_to(jumpTarget))
+		velocity = position.direction_to(jumpTarget) * minf(jumpSpeed, position.distance_to(jumpTarget))
 	else:
 		$biterBeetleAnimations.play("attack",8)
 		isJumping = false
@@ -44,7 +44,7 @@ func handleJump(delta):
 func jumpAttack(targetLocation):
 	jumpTarget = targetLocation
 	$biterBeetleAnimations.play("attack")
-	print(1)
+	
 
 func walkTowards(xspot,yspot):
 	pass
@@ -61,3 +61,6 @@ func stopJumpAnim():
 func endJumpAnim():
 	velocity = Vector2(0,0)
 	jumpInactive = true
+
+func die():
+	pass
