@@ -40,7 +40,10 @@ func handleJump(delta):
 	else:
 		$biterBeetleAnimations.play("attack",8)
 		isJumping = false
-
+	if hitWithAttack == true:
+		hitWithAttack = false
+		$biterBeetleAnimations.play("attack",8)
+		isJumping = false
 func jumpAttack(targetLocation):
 	jumpTarget = targetLocation
 	$biterBeetleAnimations.play("attack")

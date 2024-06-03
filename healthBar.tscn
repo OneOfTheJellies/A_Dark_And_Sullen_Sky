@@ -1,0 +1,103 @@
+[gd_scene load_steps=25 format=3 uid="uid://dwht4yuutqxir"]
+
+[ext_resource type="Texture2D" uid="uid://dv2hdsg3tuwm4" path="res://Test project/healthbar/healthbar10.png" id="1_3f5yv"]
+[ext_resource type="Texture2D" uid="uid://c44jxsm6lnvbq" path="res://Test project/healthbar/healthbar1.png" id="2_yyi0s"]
+[ext_resource type="Texture2D" uid="uid://taspqffymm1s" path="res://Test project/healthbar/healthbar2.png" id="3_g8mwy"]
+[ext_resource type="Texture2D" uid="uid://bgm7lir6ykhp" path="res://Test project/healthbar/healthbar3.png" id="4_scwiv"]
+[ext_resource type="Texture2D" uid="uid://b0mghi88qx70t" path="res://Test project/healthbar/healthbar4.png" id="5_m5xg4"]
+[ext_resource type="Texture2D" uid="uid://bktf3mnn73hhc" path="res://Test project/healthbar/healthbar5.png" id="6_fw0jf"]
+[ext_resource type="Texture2D" uid="uid://c2ipyw4vkvg8x" path="res://Test project/healthbar/healthbar6.png" id="7_4gsvc"]
+[ext_resource type="Texture2D" uid="uid://d3i1yucvh8jwr" path="res://Test project/healthbar/healthbar7.png" id="8_sa6hg"]
+[ext_resource type="Texture2D" uid="uid://dk2vag3pu3bks" path="res://Test project/healthbar/healthbar8.png" id="9_qnedg"]
+[ext_resource type="Texture2D" uid="uid://c7haur2ov5adm" path="res://Test project/healthbar/healthbar9.png" id="10_2apov"]
+[ext_resource type="Texture2D" uid="uid://cpa6rqosmkhp0" path="res://Test project/healthbar/healthbar11.png" id="11_08hwy"]
+[ext_resource type="Texture2D" uid="uid://dnc4vh77ksvxb" path="res://Test project/healthbar/healthbar12.png" id="12_w4nf5"]
+[ext_resource type="Texture2D" uid="uid://nqjmrl25n26e" path="res://Test project/healthbar/healthbar13.png" id="13_wpu3l"]
+[ext_resource type="Texture2D" uid="uid://ch0fcc56xc1m6" path="res://Test project/healthbar/healthbar14.png" id="14_nuuhb"]
+[ext_resource type="Texture2D" uid="uid://ds2holjbh44kf" path="res://Test project/healthbar/healthbar15.png" id="15_pio27"]
+[ext_resource type="Texture2D" uid="uid://dpq2uhko2bfug" path="res://Test project/healthbar/healthbar16.png" id="16_qqkt2"]
+[ext_resource type="Texture2D" uid="uid://iu6r8x6sed51" path="res://Test project/healthbar/healthbar17.png" id="17_poem1"]
+[ext_resource type="Texture2D" uid="uid://captpgcun6v76" path="res://Test project/healthbar/healthbar18.png" id="18_n42cp"]
+[ext_resource type="Texture2D" uid="uid://dqfopbe4crqcx" path="res://Test project/healthbar/healthbar19.png" id="19_yggqm"]
+
+[sub_resource type="Animation" id="Animation_nji0w"]
+resource_name = "full"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_yyi0s")]
+}
+
+[sub_resource type="Animation" id="Animation_y6l7n"]
+resource_name = "downTo2"
+length = 0.40001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("3_g8mwy"), ExtResource("4_scwiv"), ExtResource("5_m5xg4"), ExtResource("6_fw0jf")]
+}
+
+[sub_resource type="Animation" id="Animation_cmoo6"]
+resource_name = "downTo1"
+length = 0.40001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("7_4gsvc"), ExtResource("8_sa6hg"), ExtResource("9_qnedg"), ExtResource("10_2apov")]
+}
+
+[sub_resource type="Animation" id="Animation_o06yv"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_3f5yv"), ExtResource("11_08hwy"), ExtResource("12_w4nf5"), ExtResource("13_wpu3l"), ExtResource("14_nuuhb"), ExtResource("15_pio27"), ExtResource("16_qqkt2"), ExtResource("17_poem1"), ExtResource("18_n42cp"), ExtResource("19_yggqm"), null]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c2v7f"]
+_data = {
+"die": SubResource("Animation_o06yv"),
+"downTo1": SubResource("Animation_cmoo6"),
+"downTo2": SubResource("Animation_y6l7n"),
+"full": SubResource("Animation_nji0w")
+}
+
+[node name="healthBar" type="CanvasLayer"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(34, 48)
+texture = ExtResource("1_3f5yv")
+
+[node name="healthBarAnimations" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_c2v7f")
+}

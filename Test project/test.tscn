@@ -1,13 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://fn8fe3p8nay6"]
 
-[ext_resource type="PackedScene" uid="uid://bwkwex2p35a1b" path="res://canvas_layer.tscn" id="1_q06si"]
 [ext_resource type="PackedScene" uid="uid://bdbfeqm0w0j6d" path="res://Test project/biter_beetle.tscn" id="1_wjqh1"]
 [ext_resource type="PackedScene" uid="uid://dyce763tpvejl" path="res://Test project/character_body_2d.tscn" id="2_dbqiv"]
 [ext_resource type="PackedScene" uid="uid://d4cl7xilgd7ik" path="res://tile_map.tscn" id="3_y3pdb"]
+[ext_resource type="PackedScene" uid="uid://dwht4yuutqxir" path="res://healthBar.tscn" id="4_yawo7"]
 
 [node name="test" type="Node2D"]
-
-[node name="CanvasLayer" parent="." instance=ExtResource("1_q06si")]
 
 [node name="Player" parent="." instance=ExtResource("2_dbqiv")]
 position = Vector2(438, 88)
@@ -18,3 +16,5 @@ layer_1/tile_data = PackedInt32Array(327686, 196609, 1, 327696, 196609, 1, 32769
 
 [node name="biterBeetle" parent="." instance=ExtResource("1_wjqh1")]
 position = Vector2(284, 138)
+
+[node name="healthBar" parent="." instance=ExtResource("4_yawo7")]
