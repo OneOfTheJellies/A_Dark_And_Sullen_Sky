@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwkwex2p35a1b"]
+
+[ext_resource type="Texture2D" uid="uid://c44jxsm6lnvbq" path="res://Test project/healthbar/healthbar1.png" id="1_c7do8"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(34, 48)
+texture = ExtResource("1_c7do8")
