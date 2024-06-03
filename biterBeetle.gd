@@ -30,6 +30,7 @@ func handleAttack():
 		var viable = false
 		for child in possibleTarget.get_children():
 			if child.name == "Damageable":
+				print(2)
 				viable = true
 		if viable == true:
 			possibleTarget.find_child("Damageable").getHit(1)
