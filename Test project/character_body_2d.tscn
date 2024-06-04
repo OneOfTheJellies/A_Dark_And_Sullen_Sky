@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://ssuk010gcan0" path="res://Test project/Player_side_red_ cloak_running/Player_side_red_cloak_running3.png" id="4_xlx4i"]
 [ext_resource type="Texture2D" uid="uid://dxb0cuvl3fs8m" path="res://Test project/Player_side_red_ cloak_running/Player_side_red_cloak_running4.png" id="5_8nni8"]
 [ext_resource type="Texture2D" uid="uid://tcu1vrtqdecn" path="res://Test project/Player_side_red_ cloak_running/Player_side_red_cloak_running5.png" id="6_boxur"]
-[ext_resource type="Script" path="res://Test project/Damagable.gd" id="9_827yw"]
+[ext_resource type="Script" path="res://Test project/DamagablePlayer.gd" id="9_vbuxk"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mjict"]
 animations = [{
@@ -62,4 +62,4 @@ animation = &"walk"
 [node name="Targetable" type="Node" parent="."]
 
 [node name="Damageable" type="Node" parent="."]
-script = ExtResource("9_827yw")
+script = ExtResource("9_vbuxk")

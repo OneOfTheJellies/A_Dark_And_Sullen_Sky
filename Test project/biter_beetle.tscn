@@ -138,9 +138,8 @@ shape = SubResource("CapsuleShape2D_yymfy")
 [node name="Gravity" type="Node" parent="."]
 script = ExtResource("4_rvlod")
 
-[node name="Damageable" type="Node" parent="." node_paths=PackedStringArray("parent")]
+[node name="Damageable" type="Node" parent="."]
 script = ExtResource("4_5qvd6")
-parent = NodePath("..")
 
 [node name="Targetable" type="Node" parent="."]
 

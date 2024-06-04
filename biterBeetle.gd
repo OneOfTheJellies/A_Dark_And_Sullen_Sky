@@ -28,22 +28,21 @@ func _physics_process(delta):
 func handleAttack():
 	for possibleTarget in $attackArea.get_overlapping_bodies():
 		var viable = false
-		for child in possibleTarget.get_children():
-			if child.name == "Damageable":
-				print(2)
-				viable = true
-		if viable == true:
-			hitWithAttack = true
-			possibleTarget.find_child("Damageable").getHit(1)
+		if !possibleTarget.get_children().has(self):
+			print(possibleTarget)
+			for child in possibleTarget.get_children():
+				if child.name == "Damageable":
+					viable = true
+			if viable == true:
+				hitWithAttack = true
+				possibleTarget.find_child("Damageable").getHit(1)
 
 func handleJump(delta):
-	if position.distance_to(jumpTarget) > 10 and !hitWithAttack:
+	if position.distance_to(jumpTarget) > 10:
 		velocity = position.direction_to(jumpTarget) * minf(jumpSpeed, position.distance_to(jumpTarget))
 	else:
 		$biterBeetleAnimations.play("attack",8)
 		isJumping = false
-	if hitWithAttack == true:
-		hitWithAttack = false
 func jumpAttack(targetLocation):
 	jumpTarget = targetLocation
 	$biterBeetleAnimations.play("attack")
