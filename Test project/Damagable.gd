@@ -11,5 +11,5 @@ func getHit(damage):
 	health -= damage
 	print(str(health))
 	if health <= 0:
-		get_parent().get_parent().find_child("healthBar").find_child("healthBarAnimations").play()
+		#get_parent().get_parent().find_child("healthBar").find_child("healthBarAnimations").play("die")
 		get_parent().die()

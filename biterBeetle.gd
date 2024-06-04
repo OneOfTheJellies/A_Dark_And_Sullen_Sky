@@ -33,6 +33,7 @@ func handleAttack():
 				print(2)
 				viable = true
 		if viable == true:
+			hitWithAttack = true
 			possibleTarget.find_child("Damageable").getHit(1)
 
 func handleJump(delta):
@@ -43,8 +44,6 @@ func handleJump(delta):
 		isJumping = false
 	if hitWithAttack == true:
 		hitWithAttack = false
-		$biterBeetleAnimations.play("attack",8)
-		isJumping = false
 func jumpAttack(targetLocation):
 	jumpTarget = targetLocation
 	$biterBeetleAnimations.play("attack")

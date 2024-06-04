@@ -74,6 +74,7 @@ func cyoteTimeout():
 
 func reset_local():
 	global_position = Vector2(64*9,2.5*9)
+	$Damageable.health = health
 
 func bufferTimeout():
 	jumpBuffer = false
