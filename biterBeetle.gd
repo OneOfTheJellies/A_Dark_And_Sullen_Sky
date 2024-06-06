@@ -28,7 +28,7 @@ func _physics_process(delta):
 func handleAttack():
 	for possibleTarget in $attackArea.get_overlapping_bodies():
 		var viable = false
-		if !possibleTarget.get_children().has(self):
+		if possibleTarget != self:
 			print(possibleTarget)
 			for child in possibleTarget.get_children():
 				if child.name == "Damageable":
@@ -38,7 +38,7 @@ func handleAttack():
 				possibleTarget.find_child("Damageable").getHit(1)
 
 func handleJump(delta):
-	if position.distance_to(jumpTarget) > 10:
+	if position.distance_to(jumpTarget) > 20:
 		velocity = position.direction_to(jumpTarget) * minf(jumpSpeed, position.distance_to(jumpTarget))
 	else:
 		$biterBeetleAnimations.play("attack",8)
