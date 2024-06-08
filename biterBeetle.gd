@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 const speed = 300.0
 const health = 3
+@export var map : TileMap
 
 # stuff for jumping
 const jumpSpeed = 1800
@@ -11,7 +12,6 @@ var jumpTarget
 var isJumping
 var jumpInactive = true
 
-var hitWithAttack : bool = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -20,8 +20,12 @@ var getdelta
 func _physics_process(delta):
 	getdelta = delta
 	if isJumping:
-		handleAttack()
-		handleJump(delta)
+		if checkForCollisions() == true:
+			isJumping = false
+			$biterBeetleAnimations.play("attack",8)
+		else:
+			handleAttack()
+			handleJump(delta)
 
 	move_and_slide()
 
@@ -34,7 +38,6 @@ func handleAttack():
 				if child.name == "Damageable":
 					viable = true
 			if viable == true:
-				hitWithAttack = true
 				possibleTarget.find_child("Damageable").getHit(1)
 
 func handleJump(delta):
@@ -43,6 +46,7 @@ func handleJump(delta):
 	else:
 		$biterBeetleAnimations.play("attack",8)
 		isJumping = false
+
 func jumpAttack(targetLocation):
 	jumpTarget = targetLocation
 	$biterBeetleAnimations.play("attack")
@@ -66,3 +70,13 @@ func endJumpAnim():
 
 func die():
 	pass
+
+func checkForCollisions():
+	if is_on_ceiling() or is_on_wall():
+		if !is_on_floor():
+			return true
+	if get_last_slide_collision():
+		if get_last_slide_collision().get_collider().get_script():
+			return true
+		else:
+			return false
