@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bdbfeqm0w0j6d"]
+[gd_scene load_steps=27 format=3 uid="uid://bdbfeqm0w0j6d"]
 
 [ext_resource type="Script" path="res://biterBeetle.gd" id="1_yxkec"]
 [ext_resource type="Texture2D" uid="uid://dcu3ytnsav703" path="res://Test project/biterBeetle/attack/Biter_beetle_attack8.png" id="2_gcy4q"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://dmuawdgfiyrfv" path="res://Test project/biterBeetle/attack/Biter_beetle_attack6.png" id="14_otgyg"]
 [ext_resource type="Texture2D" uid="uid://bkv7nhep83xya" path="res://Test project/biterBeetle/attack/Biter_beetle_attack7.png" id="15_6rwke"]
 [ext_resource type="Texture2D" uid="uid://cd7rxpc7l13wb" path="res://Test project/biterBeetle/attack/Biter_beetle_attack9.png" id="16_046ff"]
+[ext_resource type="Texture2D" uid="uid://dcf4j4254p38i" path="res://Test project/biterBeetle/Biter_beetle_full1.png" id="17_p7l5l"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yymfy"]
 radius = 14.0
@@ -115,9 +116,26 @@ tracks/0/keys = {
 "values": [ExtResource("6_0eu1u"), ExtResource("7_pomo8"), ExtResource("8_nqhso")]
 }
 
+[sub_resource type="Animation" id="Animation_7em16"]
+resource_name = "idle"
+length = 0.10001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../biterBeetleSkin:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("17_p7l5l")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l383a"]
 _data = {
 "attack": SubResource("Animation_qpnve"),
+"idle": SubResource("Animation_7em16"),
 "jumpAttack": SubResource("Animation_p8axv"),
 "jumpCharge": SubResource("Animation_b2lwj"),
 "jumpEnd": SubResource("Animation_7y8cv"),
@@ -128,7 +146,7 @@ _data = {
 script = ExtResource("1_yxkec")
 
 [node name="biterBeetleSkin" type="Sprite2D" parent="."]
-texture = ExtResource("9_mag0j")
+texture = ExtResource("17_p7l5l")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, 10)

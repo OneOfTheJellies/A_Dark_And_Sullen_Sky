@@ -6,14 +6,14 @@ const health = 3
 @export var map : TileMap
 
 # stuff for jumping
-const jumpSpeed = 3600
+const jumpSpeed = 7200
 const jumpDist = 200
 var jumpTarget
 var isJumping
 var jumpDirection
 var jumpInactive = true
 var jumpTime = 0
-var jumpTimeLimit = 2
+var jumpTimeLimit = 1
 var isFinishingJump:bool = false
 var jumpFinishTime = 1
 
@@ -32,7 +32,10 @@ func _physics_process(delta):
 		else:
 			handleAttack()
 			handleJump(delta)
-
+	if !isJumping:
+		if $biterBeetleAnimations.current_animation != "idle":
+			$biterBeetleAnimations.play("idle")
+	
 	move_and_slide()
 
 func handleAttack():
@@ -52,6 +55,8 @@ func handleJump(delta):
 		velocity = jumpDirection * jumpSpeed * delta
 		if isFinishingJump != true:
 			jumpTime += 1 * delta
+		else:
+			velocity *= 2
 	else:
 		isFinishingJump = true
 		get_tree().create_timer(jumpFinishTime).timeout.connect(jumpFinishTimeout)
