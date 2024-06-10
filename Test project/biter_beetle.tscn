@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://biterBeetle.gd" id="1_yxkec"]
 [ext_resource type="Texture2D" uid="uid://dcu3ytnsav703" path="res://Test project/biterBeetle/attack/Biter_beetle_attack8.png" id="2_gcy4q"]
+[ext_resource type="Script" path="res://Test project/CharacterPhysics.gd" id="3_32u7f"]
 [ext_resource type="Script" path="res://Test project/Damagable.gd" id="4_5qvd6"]
-[ext_resource type="Script" path="res://Test project/Gravity.gd" id="4_rvlod"]
 [ext_resource type="Script" path="res://Test project/stateMachine_biterBeetle.gd" id="5_5kypk"]
 [ext_resource type="Texture2D" uid="uid://ehf7duufiyae" path="res://Test project/biterBeetle/walk/Biter_beetle_walk1.png" id="6_0eu1u"]
 [ext_resource type="Texture2D" uid="uid://cpkt021hqr4u3" path="res://Test project/biterBeetle/walk/Biter_beetle_walk2.png" id="7_pomo8"]
@@ -61,6 +61,22 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_7em16"]
+resource_name = "idle"
+length = 0.10001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../biterBeetleSkin:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("17_p7l5l")]
+}
+
 [sub_resource type="Animation" id="Animation_p8axv"]
 resource_name = "jumpAttack"
 length = 0.20001
@@ -116,22 +132,6 @@ tracks/0/keys = {
 "values": [ExtResource("6_0eu1u"), ExtResource("7_pomo8"), ExtResource("8_nqhso")]
 }
 
-[sub_resource type="Animation" id="Animation_7em16"]
-resource_name = "idle"
-length = 0.10001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../biterBeetleSkin:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("17_p7l5l")]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l383a"]
 _data = {
 "attack": SubResource("Animation_qpnve"),
@@ -153,8 +153,8 @@ position = Vector2(0, 10)
 rotation = 1.57079
 shape = SubResource("CapsuleShape2D_yymfy")
 
-[node name="Gravity" type="Node" parent="."]
-script = ExtResource("4_rvlod")
+[node name="CharacterPhysics" type="Node" parent="."]
+script = ExtResource("3_32u7f")
 
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource("4_5qvd6")

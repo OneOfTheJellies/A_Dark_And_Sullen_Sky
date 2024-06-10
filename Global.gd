@@ -1,7 +1,9 @@
 extends Node
 
-var leftHand:
-var rightHand:
+var airResistance = 0.975
+var friction = 0.8
+var terminalVelocity = 50
+var gravity = 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
