@@ -1,12 +1,13 @@
 extends Node
 
 var currentVelocity := Vector2(0,0)
+var stableFooting := false
 
-func _process(delta):
+func applyPhysics(delta):
 	applyAirResistance()
 	applyFriction()
 	applyGravity()
-	applyWallBounce()
+	applyBounce()
 	move()
 
 func applyGravity():
@@ -19,7 +20,7 @@ func applyFriction():
 	if get_parent().is_on_floor() or get_parent().is_on_ceiling():
 		currentVelocity *= $"/root/Global".friction
 
-func applyWallBounce():
+func applyBounce():
 	if get_parent().is_on_wall():
 		currentVelocity.x += currentVelocity.x * 1.5
 
