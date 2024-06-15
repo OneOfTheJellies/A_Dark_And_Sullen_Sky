@@ -11,7 +11,9 @@ const jumpDist = 200
 var jumpTarget
 var isAttacking
 var jumpDirection
-var jumpOvershoot
+var jumpOvershoot = Vector2(0,-10)
+var lookingForFooting := true
+var footinglessTime := 1.5
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -22,10 +24,6 @@ func _physics_process(delta):
 	getdelta = delta
 	if isAttacking:
 		handleAttack()
-	else:
-		if $biterBeetleAnimations.current_animation_length - 0.03 < $biterBeetleAnimations.current_animation_position:
-			if $biterBeetleAnimations.current_animation != "idle":
-				$biterBeetleAnimations.play("idle")
 
 #movement
 	$CharacterPhysics.applyPhysics(delta)
@@ -56,8 +54,10 @@ func walkTowards(xspot,yspot):
 # jump functions
 func beginJump():
 	$CharacterPhysics.stableFooting = false
+	lookingForFooting = false
+	get_tree().create_timer(footinglessTime).timeout.connect(footinglessTimeout)
 	isAttacking = true
-	addVelocity(jumpPower * position.direction_to(jumpTarget + Vector2(0,jumpOvershoot)))
+	addVelocity(jumpPower * position.direction_to(jumpTarget + jumpOvershoot))
 
 func stopJumpAnim():
 	$biterBeetleAnimations.pause()
@@ -82,7 +82,10 @@ func addVelocity(velocityAdded:Vector2):
 	$CharachterPhysics.currentVelocity += velocityAdded
 
 func checkFooting():
-	if is_on_ceiling() or is_on_floor() or is_on_wall():
+	if ( is_on_ceiling() or is_on_floor() or is_on_wall() ) and lookingForFooting:
 		$CharacterPhysics.stableFooting = true
 	else:
 		$CharacterPhysics.stableFooting = false
+
+func footinglessTimeout():
+	lookingForFooting = true
