@@ -1,17 +1,20 @@
 extends CharacterBody2D
 
 const SPEED = 200.0
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = -300.0
 const jumpBufferLength = 0.2
 const cyoteTimeLength = 0.2
 const health = 3
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var gravity
 var jumpAvailable:bool = false
 var jumpBuffer:bool = false
 var wasOnFloor:bool = false
 var drift = false
+
+func _ready():
+	gravity = $"/root/Global".gravity
 
 func _physics_process(delta):
 	if not is_on_floor():

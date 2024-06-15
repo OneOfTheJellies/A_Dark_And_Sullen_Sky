@@ -3,32 +3,35 @@ extends CharacterBody2D
 
 const speed = 300.0
 const health = 3
-@export var map : TileMap
+@export var getPhysics : Node
 
 # stuff for jumping
 const jumpPower = 7200
 const jumpDist = 200
 var jumpTarget
-var isJumping
+var isAttacking
 var jumpDirection
+var jumpOvershoot
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var getdelta
 
 func _physics_process(delta):
+	print($biterBeetleAnimations.current_animation_position)
 	getdelta = delta
-	if isJumping:
-		if checkForCollisions() == true:
-			isJumping = false
-			$biterBeetleAnimations.play("attack",8)
-		else:
-			handleAttack()
-	if !isJumping:
-		if $biterBeetleAnimations.current_animation != "idle":
-			$biterBeetleAnimations.play("idle")
-	
+	if isAttacking:
+		handleAttack()
+	else:
+		if $biterBeetleAnimations.current_animation_length - 0.03 < $biterBeetleAnimations.current_animation_position:
+			if $biterBeetleAnimations.current_animation != "idle":
+				$biterBeetleAnimations.play("idle")
+
+#movement
+	$CharacterPhysics.applyPhysics(delta)
 	move_and_slide()
+	checkFooting()
+	$CharacterPhysics.doResets()
 
 func handleAttack():
 	for possibleTarget in $attackArea.get_overlapping_bodies():
@@ -39,23 +42,22 @@ func handleAttack():
 					viable = true
 			if viable == true:
 				$biterBeetleAnimations.play("attack",8)
-				isJumping = false
+				isAttacking = false
 				possibleTarget.find_child("Damageable").getHit(1)
 
 func jumpAttack(targetLocation):
 	jumpTarget = targetLocation
 	$biterBeetleAnimations.play("attack")
-	addVelocity(jumpPower * position.direction_to(jumpTarget))
+
 
 func walkTowards(xspot,yspot):
 	pass
 
 # jump functions
 func beginJump():
-	jumpDirection = position.direction_to(jumpTarget)
-	rotation = position.angle_to(jumpTarget)
-	isJumping = true
-	
+	$CharacterPhysics.stableFooting = false
+	isAttacking = true
+	addVelocity(jumpPower * position.direction_to(jumpTarget + Vector2(0,jumpOvershoot)))
 
 func stopJumpAnim():
 	$biterBeetleAnimations.pause()
@@ -78,3 +80,9 @@ func checkForCollisions():
 
 func addVelocity(velocityAdded:Vector2):
 	$CharachterPhysics.currentVelocity += velocityAdded
+
+func checkFooting():
+	if is_on_ceiling() or is_on_floor() or is_on_wall():
+		$CharacterPhysics.stableFooting = true
+	else:
+		$CharacterPhysics.stableFooting = false
