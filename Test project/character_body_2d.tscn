@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dyce763tpvejl"]
+[gd_scene load_steps=12 format=3 uid="uid://dyce763tpvejl"]
 
 [ext_resource type="Script" path="res://Test project/Player.gd" id="1_ea58r"]
 [ext_resource type="Texture2D" uid="uid://bny38bm0v7rjo" path="res://Player_side_red_cloak_float.png" id="2_akxi7"]
@@ -46,12 +46,12 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p7pfk"]
+radius = 6.0
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_ea58r")
-
-[node name="CollisionShape" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(0, -16, -8, -12, -8, 12, -4, 16, 4, 16, 8, 12, 8, -8, 4, -16)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("2_bxq0w")
@@ -64,3 +64,7 @@ animation = &"walk"
 
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource("9_vbuxk")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_p7pfk")

@@ -1,9 +1,9 @@
 extends Node
 
-var airResistance = 59
-var friction = 48
-var terminalVelocity = 50
-var gravity = 600
+@export var airResistance = 59
+@export var friction = 48
+@export var terminalVelocity = 50
+@export var gravity = 600
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

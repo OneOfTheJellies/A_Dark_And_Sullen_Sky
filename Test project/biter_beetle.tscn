@@ -141,11 +141,12 @@ _data = {
 
 [node name="biterBeetle" type="CharacterBody2D" node_paths=PackedStringArray("getPhysics")]
 collision_layer = 4
+slide_on_ceiling = false
 script = ExtResource("1_yxkec")
 getPhysics = NodePath("CharacterPhysics")
 
 [node name="biterBeetleSkin" type="Sprite2D" parent="."]
-texture = ExtResource("9_mag0j")
+texture = ExtResource("15_6rwke")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, 10)

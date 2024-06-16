@@ -18,7 +18,7 @@ func applyAirResistance(delta):
 	currentVelocity *= $"/root/Global".airResistance * delta
 
 func applyFriction(delta):
-	if get_parent().is_on_floor() or get_parent().is_on_ceiling():
+	if get_parent().is_on_floor() or get_parent().is_on_ceiling() or get_parent().is_on_wall():
 		currentVelocity *= $"/root/Global".friction * delta
 
 func move():
@@ -34,3 +34,5 @@ func doResets():
 func applyBounce():
 	if get_parent().is_on_wall():
 		currentVelocity.x += currentVelocity.x * -1.5
+	if get_parent().is_on_ceiling() or get_parent().is_on_floor():
+		currentVelocity.y += currentVelocity.y * -1.5
