@@ -2,6 +2,8 @@ extends Node
 
 var currentVelocity := Vector2(0,0)
 var stableFooting := false
+func getVelocity(change):
+	currentVelocity += change
 
 func applyPhysics(delta):
 	applyAirResistance(delta)

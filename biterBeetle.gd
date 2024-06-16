@@ -6,14 +6,14 @@ const health = 3
 @export var getPhysics : Node
 
 # stuff for jumping
-const jumpPower = 7200
+const jumpPower = 720
 const jumpDist = 200
 var jumpTarget
 var isAttacking
 var jumpDirection
 var jumpOvershoot = Vector2(0,-10)
 var lookingForFooting := true
-var footinglessTime := 1.5
+var footinglessTime := 2.5
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -24,6 +24,8 @@ func _physics_process(delta):
 	getdelta = delta
 	if isAttacking:
 		handleAttack()
+		if (lookingForFooting == false and is_on_floor() == false) or velocity.x < 1:
+			lookingForFooting = true
 
 #movement
 	$CharacterPhysics.applyPhysics(delta)
@@ -45,6 +47,8 @@ func handleAttack():
 
 func jumpAttack(targetLocation):
 	jumpTarget = targetLocation
+	lookingForFooting = false
+	get_tree().create_timer(footinglessTime).timeout.connect(footinglessTimeout)
 	$biterBeetleAnimations.play("attack")
 
 
@@ -54,8 +58,6 @@ func walkTowards(xspot,yspot):
 # jump functions
 func beginJump():
 	$CharacterPhysics.stableFooting = false
-	lookingForFooting = false
-	get_tree().create_timer(footinglessTime).timeout.connect(footinglessTimeout)
 	isAttacking = true
 	addVelocity(jumpPower * position.direction_to(jumpTarget + jumpOvershoot))
 
@@ -68,22 +70,15 @@ func endJumpAnim():
 func die():
 	pass
 
-func checkForCollisions():
-	if is_on_ceiling() or is_on_wall():
-		if !is_on_floor():
-			return true
-	if get_last_slide_collision():
-		if get_last_slide_collision().get_collider().get_script():
-			return true
-		else:
-			return false
 
 func addVelocity(velocityAdded:Vector2):
-	$CharachterPhysics.currentVelocity += velocityAdded
+	$CharacterPhysics.getVelocity(velocityAdded)
 
 func checkFooting():
 	if ( is_on_ceiling() or is_on_floor() or is_on_wall() ) and lookingForFooting:
-		$CharacterPhysics.stableFooting = true
+		if $CharacterPhysics.stableFooting == false:
+			$CharacterPhysics.stableFooting = true
+			$biterBeetleAnimations.play("idle")
 	else:
 		$CharacterPhysics.stableFooting = false
 
