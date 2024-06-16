@@ -140,6 +140,7 @@ _data = {
 }
 
 [node name="biterBeetle" type="CharacterBody2D" node_paths=PackedStringArray("getPhysics")]
+collision_layer = 4
 script = ExtResource("1_yxkec")
 getPhysics = NodePath("CharacterPhysics")
 
@@ -163,6 +164,8 @@ script = ExtResource("4_5qvd6")
 script = ExtResource("5_5kypk")
 
 [node name="Tageting area" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tageting area"]
 shape = SubResource("CircleShape2D_aub6w")
@@ -174,6 +177,8 @@ libraries = {
 }
 
 [node name="attackArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 6
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="attackArea"]
 polygon = PackedVector2Array(-22, 18, -22, 0, -32, 0, -32, 18)

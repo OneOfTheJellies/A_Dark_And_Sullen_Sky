@@ -11,7 +11,7 @@ const jumpDist = 200
 var jumpTarget
 var isAttacking
 var jumpDirection
-var jumpOvershoot = Vector2(0,-10)
+var jumpOvershoot = Vector2(0,-0.2)
 var lookingForFooting := true
 var footinglessTime := 2.5
 
@@ -20,7 +20,6 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var getdelta
 
 func _physics_process(delta):
-	print($biterBeetleAnimations.current_animation_position)
 	getdelta = delta
 	if isAttacking:
 		handleAttack()
@@ -59,7 +58,7 @@ func walkTowards(xspot,yspot):
 func beginJump():
 	$CharacterPhysics.stableFooting = false
 	isAttacking = true
-	addVelocity(jumpPower * position.direction_to(jumpTarget + jumpOvershoot))
+	addVelocity(jumpPower * position.direction_to(jumpTarget + (jumpOvershoot * position.distance_to(jumpTarget)) ))
 
 func stopJumpAnim():
 	$biterBeetleAnimations.pause()
@@ -75,7 +74,7 @@ func addVelocity(velocityAdded:Vector2):
 	$CharacterPhysics.getVelocity(velocityAdded)
 
 func checkFooting():
-	if ( is_on_ceiling() or is_on_floor() or is_on_wall() ) and lookingForFooting:
+	if is_on_floor() and lookingForFooting:
 		if $CharacterPhysics.stableFooting == false:
 			$CharacterPhysics.stableFooting = true
 			$biterBeetleAnimations.play("idle")
