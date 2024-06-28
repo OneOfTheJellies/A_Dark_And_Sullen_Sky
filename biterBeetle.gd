@@ -5,6 +5,10 @@ const speed = 300.0
 const health = 3
 @export var getPhysics : Node
 
+# stuff for walking 
+var isWalking := false
+var walkDirection := Vector2(1,0)
+
 # stuff for jumping
 const jumpPower = 720
 const jumpDist = 200
@@ -15,7 +19,7 @@ var jumpOvershoot = Vector2(0,-0.2)
 var lookingForFooting := true
 var footinglessTime := 2.5
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
+
 var getdelta
 
 func _physics_process(delta):
@@ -24,6 +28,8 @@ func _physics_process(delta):
 		handleAttack()
 		if (lookingForFooting == false and is_on_floor() == false) or velocity.x < 1:
 			lookingForFooting = true
+	if isWalking == true:
+		pass
 
 #movement
 	$CharacterPhysics.applyPhysics(delta)
@@ -47,6 +53,10 @@ func jumpAttack(targetLocation):
 	jumpTarget = targetLocation
 	lookingForFooting = false
 	get_tree().create_timer(footinglessTime).timeout.connect(footinglessTimeout)
+	if position.direction_to(targetLocation).x > 0:
+		scale.x = -1
+	if position.direction_to(targetLocation).x < 0:
+		scale.x = 1
 	$biterBeetleAnimations.play("attack")
 
 

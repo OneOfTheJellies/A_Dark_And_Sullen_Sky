@@ -3,12 +3,12 @@ extends Node
 var state : String = "idle"
 var homeScene : Vector2
 
-#Targeting
+# Walking
+
+# Targeting
 var possibleTargets : Array
 var target : CharacterBody2D
-var destination : Vector2
-# Called when the node enters the scene tree for the first time.
-
+var walkDirection : Vector2
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -25,13 +25,16 @@ func _process(delta):
 func idleProcess():
 	if !target:
 		lookForTarget()
-	if !target and !destination:
-		pass
+	if !target:
+		get_parent().isWalking = true
+	else:
+		get_parent().isWalking = false
 
 func attackProcess():
 	if get_parent().position.distance_to(target.global_position) < get_parent().jumpDist and get_parent().getPhysics.stableFooting == true:
 		if lookForSight(target) == true and get_parent().is_on_floor():
-			get_parent().jumpAttack(target.global_position)
+			if !get_parent().find_child("biterBeetleAnimations").current_animation == "attack":
+				get_parent().jumpAttack(target.global_position)
 #  when someting enters the targeting area, this adds it to a list of targets 
 #  to test line of sight to. The second function deletes it if it leaves.
 func _on_tageting_area_body_entered(body):

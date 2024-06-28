@@ -6,7 +6,7 @@ const jumpBufferLength = 0.2
 const cyoteTimeLength = 0.2
 const health = 3
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
+
 var gravity
 var jumpAvailable:bool = false
 var jumpBuffer:bool = false

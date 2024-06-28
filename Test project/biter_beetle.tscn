@@ -149,7 +149,7 @@ getPhysics = NodePath("CharacterPhysics")
 texture = ExtResource("15_6rwke")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2(0, 10)
+position = Vector2(0, 11)
 rotation = 1.57079
 shape = SubResource("CapsuleShape2D_yymfy")
 
