@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bdbfeqm0w0j6d"]
+[gd_scene load_steps=28 format=3 uid="uid://bdbfeqm0w0j6d"]
 
 [ext_resource type="Script" path="res://biterBeetle.gd" id="1_yxkec"]
 [ext_resource type="Texture2D" uid="uid://dcu3ytnsav703" path="res://Test project/biterBeetle/attack/Biter_beetle_attack8.png" id="2_gcy4q"]
@@ -28,6 +28,7 @@ radius = 480.0
 [sub_resource type="Animation" id="Animation_qpnve"]
 resource_name = "attack"
 length = 1.00001
+step = 0.166667
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -139,6 +140,9 @@ _data = {
 "walk": SubResource("Animation_x0int")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_up6tv"]
+size = Vector2(9.27825, 54.3275)
+
 [node name="biterBeetle" type="CharacterBody2D" node_paths=PackedStringArray("getPhysics")]
 collision_layer = 4
 slide_on_ceiling = false
@@ -146,7 +150,7 @@ script = ExtResource("1_yxkec")
 getPhysics = NodePath("CharacterPhysics")
 
 [node name="biterBeetleSkin" type="Sprite2D" parent="."]
-texture = ExtResource("15_6rwke")
+texture = ExtResource("9_mag0j")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, 11)
@@ -183,6 +187,14 @@ collision_mask = 6
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="attackArea"]
 polygon = PackedVector2Array(-22, 18, -22, 0, -32, 0, -32, 18)
+
+[node name="bumper" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bumper"]
+position = Vector2(-42, 28)
+rotation = -3.14159
+scale = Vector2(0.431116, 0.0736275)
+shape = SubResource("RectangleShape2D_up6tv")
 
 [connection signal="body_entered" from="Tageting area" to="stateMachine_biterBeetle" method="_on_tageting_area_body_entered"]
 [connection signal="body_exited" from="Tageting area" to="stateMachine_biterBeetle" method="_on_tageting_area_body_exited"]

@@ -5,6 +5,8 @@ const speed = 300.0
 const health = 3
 @export var getPhysics : Node
 
+var pointing := "left"
+
 # stuff for walking 
 var isWalking := false
 var walkDirection := Vector2(1,0)
@@ -29,7 +31,7 @@ func _physics_process(delta):
 		if (lookingForFooting == false and is_on_floor() == false) or velocity.x < 1:
 			lookingForFooting = true
 	if isWalking == true:
-		pass
+		handleWalk()
 
 #movement
 	$CharacterPhysics.applyPhysics(delta)
@@ -53,10 +55,12 @@ func jumpAttack(targetLocation):
 	jumpTarget = targetLocation
 	lookingForFooting = false
 	get_tree().create_timer(footinglessTime).timeout.connect(footinglessTimeout)
-	if position.direction_to(targetLocation).x > 0:
+	if position.direction_to(targetLocation).x > 0 and pointing == "left":
 		scale.x = -1
-	if position.direction_to(targetLocation).x < 0:
-		scale.x = 1
+		pointing = "right"
+	if position.direction_to(targetLocation).x < 0 and pointing == "right":
+		scale.x = -1
+		pointing = "left"
 	$biterBeetleAnimations.play("attack")
 
 
@@ -74,6 +78,12 @@ func stopJumpAnim():
 
 func endJumpAnim():
 	velocity = Vector2(0,0)
+
+func handleWalk():
+	if find_child("CharacterPhysics").stableFooting == true:
+		addVelocity(speed * walkDirection)
+	if !$bumper.get_overlapping_bodies():
+		pass
 
 func die():
 	pass
