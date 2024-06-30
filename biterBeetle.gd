@@ -71,7 +71,7 @@ func walkTowards(xspot,yspot):
 func beginJump():
 	$CharacterPhysics.stableFooting = false
 	isAttacking = true
-	addVelocity(jumpPower * position.direction_to(jumpTarget + (jumpOvershoot * position.distance_to(jumpTarget)) ))
+	addVelocity(jumpPower * position.direction_to(jumpTarget + Vector2(0,minf(80.0 , jumpOvershoot.y * position.distance_to(jumpTarget))) ))
 
 func stopJumpAnim():
 	$biterBeetleAnimations.pause()
