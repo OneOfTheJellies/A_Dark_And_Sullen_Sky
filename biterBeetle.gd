@@ -86,7 +86,8 @@ func handleWalk():
 		pass
 
 func die():
-	pass
+	queue_free()
+	# ADD MORE HERE IF NECESSARY, (e.x Respawning mechanics)
 
 
 func addVelocity(velocityAdded:Vector2):

@@ -77,3 +77,6 @@ shape = SubResource("CapsuleShape2D_p7pfk")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Melee1"]
 position = Vector2(15, 0)
 shape = SubResource("CircleShape2D_g5qtt")
+
+[connection signal="body_entered" from="Melee1" to="." method="_on_melee_1_body_entered"]
+[connection signal="body_exited" from="Melee1" to="." method="_on_melee_1_body_exited"]

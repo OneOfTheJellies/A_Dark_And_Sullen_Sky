@@ -12,6 +12,10 @@ var jumpAvailable:bool = false
 var jumpBuffer:bool = false
 var wasOnFloor:bool = false
 var drift = false
+var Targets : Array
+
+@onready var melee_1 = $Melee1
+
 
 func _ready():
 	gravity = $"/root/Global".gravity
@@ -60,7 +64,18 @@ func _physics_process(delta):
 		$PlayerAnimations.flip_h = true
 	if velocity.x > 0:
 		$PlayerAnimations.flip_h = false
-
+	
+	
+	if Input.is_action_pressed("item interact"):
+		for Targets in $Melee1.get_overlapping_bodies():
+			var viable = false
+			if Targets != self:
+				for child in Targets.get_children():
+					if child.name == "Damageable":
+						viable = true
+				if viable == true:
+					Targets.find_child("Damageable").getHit(1)
+	
 	move_and_slide()
 
 func jump():
@@ -84,3 +99,17 @@ func bufferTimeout():
 
 func die():
 	reset_local()
+
+
+func _on_melee_1_body_entered(body):
+	print ("Entered")
+	for child in body.get_children():
+	#	if child.name == "Targetable":
+		Targets.append(body)
+		print ("Added ")
+
+
+
+func _on_melee_1_body_exited(body):
+	if Targets.has(body):
+		Targets.erase(body)
