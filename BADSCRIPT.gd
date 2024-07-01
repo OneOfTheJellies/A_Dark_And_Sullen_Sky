@@ -11,3 +11,5 @@ func _process(delta):
 	if Input.is_action_just_pressed("item interact"):
 		translate(Vector2(0, -100))
 		rotation = 0
+	
+	# if picked up -> get_parent().queue_free()

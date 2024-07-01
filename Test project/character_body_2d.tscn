@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dyce763tpvejl"]
+[gd_scene load_steps=13 format=3 uid="uid://dyce763tpvejl"]
 
 [ext_resource type="Script" path="res://Test project/Player.gd" id="1_ea58r"]
 [ext_resource type="Texture2D" uid="uid://bny38bm0v7rjo" path="res://Player_side_red_cloak_float.png" id="2_akxi7"]
@@ -49,6 +49,9 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p7pfk"]
 radius = 6.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_g5qtt"]
+radius = 14.0357
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_ea58r")
@@ -68,3 +71,9 @@ script = ExtResource("9_vbuxk")
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_p7pfk")
+
+[node name="Melee1" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Melee1"]
+position = Vector2(15, 0)
+shape = SubResource("CircleShape2D_g5qtt")
