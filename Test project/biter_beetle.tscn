@@ -188,13 +188,39 @@ collision_mask = 6
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="attackArea"]
 polygon = PackedVector2Array(-22, 18, -22, 0, -32, 0, -32, 18)
 
-[node name="bumper" type="Area2D" parent="."]
+[node name="cliffBumper" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="bumper"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="cliffBumper"]
 position = Vector2(-42, 28)
 rotation = -3.14159
 scale = Vector2(0.431116, 0.0736275)
 shape = SubResource("RectangleShape2D_up6tv")
+
+[node name="cliffBumper2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="cliffBumper2"]
+position = Vector2(-42, 28)
+rotation = -3.14159
+scale = Vector2(0.431116, 0.0736275)
+shape = SubResource("RectangleShape2D_up6tv")
+
+[node name="hillBumper" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hillBumper"]
+position = Vector2(-42, -16)
+rotation = -3.14159
+scale = Vector2(0.431116, 0.0736275)
+shape = SubResource("RectangleShape2D_up6tv")
+debug_color = Color(0.670588, 0.0313726, 1, 0.666667)
+
+[node name="hillBumper2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hillBumper2"]
+position = Vector2(-42, -39)
+rotation = -3.14159
+scale = Vector2(0.431116, 0.0736275)
+shape = SubResource("RectangleShape2D_up6tv")
+debug_color = Color(0.741176, 0.219608, 1, 0.419608)
 
 [connection signal="body_entered" from="Tageting area" to="stateMachine_biterBeetle" method="_on_tageting_area_body_entered"]
 [connection signal="body_exited" from="Tageting area" to="stateMachine_biterBeetle" method="_on_tageting_area_body_exited"]

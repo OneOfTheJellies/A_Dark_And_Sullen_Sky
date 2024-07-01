@@ -13,6 +13,7 @@ var jumpBuffer:bool = false
 var wasOnFloor:bool = false
 var drift = false
 var Targets : Array
+var directionFacing := "right"
 
 @onready var melee_1 = $Melee1
 
@@ -60,10 +61,12 @@ func _physics_process(delta):
 
 	if drift:
 		$PlayerAnimations.play("float",1)
-	if velocity.x < 0:
-		$PlayerAnimations.flip_h = true
-	if velocity.x > 0:
-		$PlayerAnimations.flip_h = false
+	if velocity.x > 0 and directionFacing == "left":
+		scale.x = -1
+		directionFacing = "right"
+	if velocity.x < 0 and directionFacing == "right":
+		scale.x = -1
+		directionFacing = "left"
 	
 	
 	if Input.is_action_pressed("item interact"):

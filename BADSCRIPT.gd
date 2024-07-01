@@ -8,6 +8,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
+# I changed player script to flip properly - OneOfTheJellies
+	
 #	if Input.is_action_just_pressed("item interact"):
 #		translate(Vector2(0, -100))
 #		rotation = 0
