@@ -64,9 +64,6 @@ func jumpAttack(targetLocation):
 	$biterBeetleAnimations.play("attack")
 
 
-func walkTowards(xspot,yspot):
-	pass
-
 # jump functions
 func beginJump():
 	$CharacterPhysics.stableFooting = false
@@ -82,12 +79,14 @@ func endJumpAnim():
 func handleWalk():
 	if find_child("CharacterPhysics").stableFooting == true:
 		addVelocity(speed * walkDirection)
-	if !$bumper.get_overlapping_bodies():
+	if !$cliffBumper.get_overlapping_bodies() and !$cliffBumper2.get_overlapping_bodies():
+		pass
+	if $hillBumper.get_overlapping_bodies() and $hillBumper2.get_overlapping_bodies():
 		pass
 
 func die():
 	queue_free()
-	# ADD MORE HERE IF NECESSARY, (e.x Respawning mechanics)
+	# ADD MORE HERE IF NECESSARY, (e.x Respawning mechanics) | thx
 
 
 func addVelocity(velocityAdded:Vector2):
