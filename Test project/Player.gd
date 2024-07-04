@@ -14,7 +14,8 @@ var wasOnFloor:bool = false
 var drift = false
 var Targets : Array
 
-@onready var melee_1 = $Melee1
+
+var weapon1:String = ""
 
 
 func _ready():
@@ -66,7 +67,7 @@ func _physics_process(delta):
 		$PlayerAnimations.flip_h = false
 	
 	
-	if Input.is_action_pressed("item interact"):
+	if Input.is_action_just_pressed("item interact"):
 		for Targets in $Melee1.get_overlapping_bodies():
 			var viable = false
 			if Targets != self:
@@ -106,10 +107,11 @@ func _on_melee_1_body_entered(body):
 	for child in body.get_children():
 	#	if child.name == "Targetable":
 		Targets.append(body)
-		print ("Added ")
+		print ("Added")
 
 
 
 func _on_melee_1_body_exited(body):
+	print ("Exited")
 	if Targets.has(body):
 		Targets.erase(body)

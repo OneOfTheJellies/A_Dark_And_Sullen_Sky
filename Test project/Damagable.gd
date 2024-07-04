@@ -9,6 +9,6 @@ func _ready():
 	
 func getHit(damage):
 	health -= damage
-	print ("oww! I got hurt for " + String(damage))
+	print ("oww! I, " + str(get_parent().name) + " got hurt for " + str(damage))
 	if health <= 0:
 		get_parent().die()
