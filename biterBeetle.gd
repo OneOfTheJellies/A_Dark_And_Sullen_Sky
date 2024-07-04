@@ -85,7 +85,9 @@ func handleWalk():
 		pass
 
 func die():
+	print ('"noooooo" - ' + get_parent().name + ', last words ' + str(Time.get_datetime_string_from_unix_time(Time.get_unix_time_from_system(), true)))
 	queue_free()
+	
 	# ADD MORE HERE IF NECESSARY, (e.x Respawning mechanics) | thx
 
 

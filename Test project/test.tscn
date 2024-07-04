@@ -24,5 +24,6 @@ position = Vector2(284, 138)
 
 [node name="healthBar" parent="." instance=ExtResource("4_yawo7")]
 
-[node name="SwordDropped" parent="." instance=ExtResource("5_wl3f0")]
+[node name="SwordDropped" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_wl3f0")]
 position = Vector2(523, 115)
+player = NodePath("../Player")

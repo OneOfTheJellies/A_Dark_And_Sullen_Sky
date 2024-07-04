@@ -16,7 +16,7 @@ var Targets : Array
 var directionFacing := "right"
 
 
-var weapon1:String = ""
+var item1 := ""
 
 
 func _ready():
@@ -70,7 +70,7 @@ func _physics_process(delta):
 		directionFacing = "left"
 	
 	
-	if Input.is_action_just_pressed("item interact"):
+	if Input.is_action_just_pressed("attack"):
 		for Targets in $Melee1.get_overlapping_bodies():
 			var viable = false
 			if Targets != self:
@@ -118,3 +118,7 @@ func _on_melee_1_body_exited(body):
 	print ("Exited")
 	if Targets.has(body):
 		Targets.erase(body)
+
+func getItem(item):
+	item1 = item
+	#Drop current item!!!
