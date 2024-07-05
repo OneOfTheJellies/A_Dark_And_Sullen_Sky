@@ -135,7 +135,7 @@ func _on_melee_1_body_exited(body):
 
 func getItem(iname, type, speed, DMG):
 	if itemName != "":
-		var itemLoad = load(iname)
+		var itemLoad = load(itemName)
 		var itemTemp = itemLoad.instantiate()
 		get_parent().add_child(itemTemp)
 		itemTemp.global_position = $".".global_position
