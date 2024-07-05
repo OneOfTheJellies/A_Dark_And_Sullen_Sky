@@ -139,6 +139,7 @@ func getItem(iname, type, speed, DMG):
 		var itemTemp = itemLoad.instantiate()
 		get_parent().add_child(itemTemp)
 		itemTemp.global_position = $".".global_position
+		itemTemp.global_rotation = randf_range(0.2, -0.2)
 		#var itemTemp : PackedScene = load(name).instantiate()
 		#get_parent().add_child(itemTemp)
 		#itemTemp.transform = $".".transform
