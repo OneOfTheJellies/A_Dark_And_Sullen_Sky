@@ -12,7 +12,7 @@ var isWalking := false
 var walkDirection := Vector2(1,0)
 
 # stuff for jumping
-const jumpPower = 720
+const jumpPower = 500
 const jumpDist = 200
 var jumpTarget
 var isAttacking

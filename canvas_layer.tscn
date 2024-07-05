@@ -20,8 +20,8 @@
 [ext_resource type="Texture2D" uid="uid://captpgcun6v76" path="res://Test project/healthbar/healthbar18.png" id="18_cy5u1"]
 [ext_resource type="Texture2D" uid="uid://dqfopbe4crqcx" path="res://Test project/healthbar/healthbar19.png" id="19_ffdqv"]
 
-[sub_resource type="Animation" id="Animation_nji0w"]
-resource_name = "full"
+[sub_resource type="Animation" id="Animation_o06yv"]
+resource_name = "die"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -29,26 +29,10 @@ tracks/0/path = NodePath(".:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("1_c7do8")]
-}
-
-[sub_resource type="Animation" id="Animation_y6l7n"]
-resource_name = "downTo2"
-length = 0.40001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("2_d6cax"), ExtResource("3_ckq02"), ExtResource("4_ibc6p"), ExtResource("5_if1cn")]
+"values": [ExtResource("10_7khpl"), ExtResource("11_h3bke"), ExtResource("12_2l4h8"), ExtResource("13_wb8go"), ExtResource("14_nr7u6"), ExtResource("15_46wgn"), ExtResource("16_2fnxp"), ExtResource("17_fwo7i"), ExtResource("18_cy5u1"), ExtResource("19_ffdqv"), null]
 }
 
 [sub_resource type="Animation" id="Animation_cmoo6"]
@@ -67,8 +51,9 @@ tracks/0/keys = {
 "values": [ExtResource("6_5bld4"), ExtResource("7_mu20u"), ExtResource("8_3damj"), ExtResource("9_8y4oi")]
 }
 
-[sub_resource type="Animation" id="Animation_o06yv"]
-resource_name = "die"
+[sub_resource type="Animation" id="Animation_y6l7n"]
+resource_name = "downTo2"
+length = 0.40001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -76,10 +61,25 @@ tracks/0/path = NodePath(".:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("10_7khpl"), ExtResource("11_h3bke"), ExtResource("12_2l4h8"), ExtResource("13_wb8go"), ExtResource("14_nr7u6"), ExtResource("15_46wgn"), ExtResource("16_2fnxp"), ExtResource("17_fwo7i"), ExtResource("18_cy5u1"), ExtResource("19_ffdqv"), null]
+"values": [ExtResource("2_d6cax"), ExtResource("3_ckq02"), ExtResource("4_ibc6p"), ExtResource("5_if1cn")]
+}
+
+[sub_resource type="Animation" id="Animation_nji0w"]
+resource_name = "full"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_c7do8")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_c2v7f"]

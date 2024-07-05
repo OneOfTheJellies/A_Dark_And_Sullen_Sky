@@ -37,7 +37,7 @@ func _physics_process(delta):
 			jump()
 
 	if position.y > 640:
-		reset_local()
+		die()
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump"):
@@ -102,6 +102,9 @@ func bufferTimeout():
 	jumpBuffer = false
 
 func die():
+
+	$Damageable.health = 3
+	$Damageable.checkHealthFull()
 	reset_local()
 
 
