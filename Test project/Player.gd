@@ -133,10 +133,16 @@ func _on_melee_1_body_exited(body):
 	if Targets.has(body):
 		Targets.erase(body)
 
-func getItem(name, type, speed, DMG):
+func getItem(iname, type, speed, DMG):
 	if itemName != "":
-		get_parent().add_child(load(name).instantiate())
-	itemName = name
+		var itemLoad = load(iname)
+		var itemTemp = itemLoad.instantiate()
+		get_parent().add_child(itemTemp)
+		itemTemp.global_position = $".".global_position
+		#var itemTemp : PackedScene = load(name).instantiate()
+		#get_parent().add_child(itemTemp)
+		#itemTemp.transform = $".".transform
+	itemName = iname
 	itemType = type
 	itemDMG = DMG
 	itemSpeed = speed
