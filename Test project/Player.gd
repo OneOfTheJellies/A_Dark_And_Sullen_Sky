@@ -71,14 +71,15 @@ func _physics_process(delta):
 	
 	
 	if Input.is_action_just_pressed("attack"):
-		for Targets in $Melee1.get_overlapping_bodies():
-			var viable = false
-			if Targets != self:
-				for child in Targets.get_children():
-					if child.name == "Damageable":
-						viable = true
-				if viable == true:
-					Targets.find_child("Damageable").getHit(1)
+		if item1 != "":
+			for Targets in $Melee1.get_overlapping_bodies():
+				var viable = false
+				if Targets != self:
+					for child in Targets.get_children():
+						if child.name == "Damageable":
+							viable = true
+					if viable == true:
+						Targets.find_child("Damageable").getHit(1)
 	
 	move_and_slide()
 
