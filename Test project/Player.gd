@@ -14,9 +14,15 @@ var wasOnFloor:bool = false
 var drift = false
 var Targets : Array
 var directionFacing := "right"
+var canUseItem := true
 
 
-var item1 := ""
+var itemName := "" #Path to item (will make modding easier)
+var itemDMG := 0.0
+var itemType := ""
+var itemSpeed := 0.0
+#var itemHitbox := ""
+#Add more item values!
 
 
 func _ready():
@@ -40,6 +46,9 @@ func _physics_process(delta):
 		die()
 
 	# Handle jump.
+	#if Input.is_action_just_released("jump") and velocity.y < 0:
+	#	velocity.y = JUMP_VELOCITY / 3
+	
 	if Input.is_action_just_pressed("jump"):
 		jump()
 	if velocity.y > 0 and Input.is_action_pressed("down"):
@@ -71,15 +80,18 @@ func _physics_process(delta):
 	
 	
 	if Input.is_action_just_pressed("attack"):
-		if item1 != "":
-			for Targets in $Melee1.get_overlapping_bodies():
-				var viable = false
-				if Targets != self:
-					for child in Targets.get_children():
-						if child.name == "Damageable":
-							viable = true
-					if viable == true:
-						Targets.find_child("Damageable").getHit(1)
+		if itemType != "":
+			if canUseItem:
+				canUseItem = false
+				get_tree().create_timer(itemSpeed).timeout.connect(itemCooldown)
+				for Targets in $Melee1.get_overlapping_bodies():
+					var viable = false
+					if Targets != self:
+						for child in Targets.get_children():
+							if child.name == "Damageable":
+								viable = true
+						if viable == true:
+							Targets.find_child("Damageable").getHit(1)
 	
 	move_and_slide()
 
@@ -110,19 +122,25 @@ func die():
 
 
 func _on_melee_1_body_entered(body):
-	print ("Entered")
 	for child in body.get_children():
 	#	if child.name == "Targetable":
 		Targets.append(body)
-		print ("Added")
+
 
 
 
 func _on_melee_1_body_exited(body):
-	print ("Exited")
 	if Targets.has(body):
 		Targets.erase(body)
 
-func getItem(item):
-	item1 = item
+func getItem(name, type, speed, DMG):
+	if itemName != "":
+		get_parent().add_child(load(name).instantiate())
+	itemName = name
+	itemType = type
+	itemDMG = DMG
+	itemSpeed = speed
 	#Drop current item!!!
+	
+func itemCooldown():
+	canUseItem = true

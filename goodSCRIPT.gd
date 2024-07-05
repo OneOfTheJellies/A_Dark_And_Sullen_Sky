@@ -4,7 +4,7 @@ extends RigidBody2D
 @export var player:CharacterBody2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print("MWAHAHA! I AM SOOOooOoOOO (kind of...) POWERFULL!!!!") # Replace with function body.
+	print("If you are seeing this, good job! You remembered to sync changes!") # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -12,12 +12,12 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("item interact"):
 		if $Area2D.get_overlapping_bodies().has(player):
-			player.getItem("res://sword_dropped.tscn" , "Melee", 0.5 , 1) #Path to scene, Type, Speed, Damage
+			player.getItem("res://OP_sword_dropped.tscn" , "Melee", 4 , 2)
 			queue_free()
 	
 # I changed player script to flip properly - OneOfTheJellies
 
-# Thanks "OneOfTheJellies" - Someone... who is totally not "PixiePeace9" (I kept on pressing "c" instead of "x" whil typing that for some reason... Also this line is tooooo long now!)
+# Thanks "OneOfTheJellies" - Someone...
 	
 #	if Input.is_action_just_pressed("item interact"):
 #		translate(Vector2(0, -100))
