@@ -91,7 +91,7 @@ func _physics_process(delta):
 							if child.name == "Damageable":
 								viable = true
 						if viable == true:
-							Targets.find_child("Damageable").getHit(1)
+							Targets.find_child("Damageable").getHit(itemDMG)
 	
 	move_and_slide()
 
