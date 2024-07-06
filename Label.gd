@@ -12,7 +12,10 @@ func _process(delta):
 
 func display(textHere:String):
 	text = (textHere)
-	get_tree().create_timer(0.5).timeout.connect(hideText)
+	$"../Timer".stop()
+	$"../Timer".timeout.connect(hideText)
+	$"../Timer".start()
 
 func hideText():
 	text = ""
+	$"../Damageable".dmg = 0

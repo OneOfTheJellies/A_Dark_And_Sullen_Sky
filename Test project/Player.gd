@@ -147,8 +147,9 @@ func getItem(iname, type, speed, DMG):
 	itemType = type
 	itemDMG = DMG
 	itemSpeed = speed
-	canUseItem = true
+	
 	#Drop current item!!!
 	
 func itemCooldown():
 	canUseItem = true
+
