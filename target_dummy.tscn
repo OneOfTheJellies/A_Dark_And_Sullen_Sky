@@ -1,0 +1,95 @@
+[gd_scene load_steps=10 format=3 uid="uid://dka2kt1a4a6s6"]
+
+[ext_resource type="Script" path="res://target_dummy.gd" id="1_5g2nl"]
+[ext_resource type="Texture2D" uid="uid://b6w4pjqi57b6r" path="res://61bf6ed99fca40efaadaf4346c348d9f.png" id="1_qtv15"]
+[ext_resource type="FontFile" uid="uid://dbr6qtj6njllp" path="res://cc.yal.6w6.block.otf" id="2_nav7b"]
+[ext_resource type="Script" path="res://Label.gd" id="4_hwat4"]
+
+[sub_resource type="GDScript" id="GDScript_o12cg"]
+script/source = "extends Node
+var health:int
+var healthShown:int
+
+func _ready():
+	pass
+	
+func getHit(damage):
+	$\"../Label\".display(str(damage))
+	$\"../AnimationPlayer\".play(\"ouchDummy\")
+	print (\"oww! I, \" + str(get_parent().name) + \" got hurt for \" + str(damage))
+
+"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wide4"]
+radius = 18.0
+height = 44.0
+
+[sub_resource type="Animation" id="Animation_suxjr"]
+resource_name = "ouchDummy"
+length = 0.33
+step = 0.04
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0872665, 0.349066, 0.261799, 0.523599, 0.261799, 3.48787e-16, -0.0872665, 3.48787e-16]
+}
+
+[sub_resource type="Animation" id="Animation_an5wm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3j6hl"]
+_data = {
+"RESET": SubResource("Animation_an5wm"),
+"ouchDummy": SubResource("Animation_suxjr")
+}
+
+[node name="targetDummy" type="AnimatableBody2D"]
+collision_layer = 6
+collision_mask = 6
+script = ExtResource("1_5g2nl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-9.53674e-07, -4.76837e-07)
+scale = Vector2(1.23958, 1.23958)
+texture = ExtResource("1_qtv15")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -3.0
+offset_top = -36.0
+offset_right = 4.0
+offset_bottom = -30.0
+theme_override_colors/font_color = Color(0.862745, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_nav7b")
+theme_override_font_sizes/font_size = 16
+script = ExtResource("4_hwat4")
+
+[node name="Damageable" type="Node" parent="."]
+script = SubResource("GDScript_o12cg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("CapsuleShape2D_wide4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3j6hl")
+}
