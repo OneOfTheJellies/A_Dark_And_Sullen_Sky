@@ -55,13 +55,13 @@ func _physics_process(delta):
 			velocity.x = direction * SPEED
 		else: 
 			velocity.x = direction * SPEED / 1.5
-		$PlayerAnimations.play("walk",1)
+		$PlayerAnimations.play("walk")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-		$PlayerAnimations.play("idle",1)
+		$PlayerAnimations.play("idle")
 
 	if drift:
-		$PlayerAnimations.play("float",1)
+		$PlayerAnimations.play("float")
 	if velocity.x > 0 and directionFacing == "left":
 		scale.x = -1
 		directionFacing = "right"
