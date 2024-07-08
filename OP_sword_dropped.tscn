@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfqxrjhd6xmsl"]
+[gd_scene load_steps=6 format=3 uid="uid://dt1x7c2m386ts"]
 
-[ext_resource type="Script" path="res://BADSCRIPT.gd" id="1_6dluv"]
-[ext_resource type="Texture2D" uid="uid://smqqath2jy1o" path="res://638061095632921781.png" id="1_ji25y"]
+[ext_resource type="Script" path="res://goodSCRIPT.gd" id="1_a7ugk"]
+[ext_resource type="Texture2D" uid="uid://dowsw87w7282c" path="res://ezgif-7-f44a11f40e.png" id="2_11o16"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_q3njy"]
 friction = 0.5
@@ -12,17 +12,17 @@ radius = 2.0
 height = 24.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4lno7"]
-radius = 27.0
+radius = 26.0
 
 [node name="SwordDropped" type="RigidBody2D"]
 collision_layer = 8
 mass = 3.73
 physics_material_override = SubResource("PhysicsMaterial_q3njy")
-script = ExtResource("1_6dluv")
+script = ExtResource("1_a7ugk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 0.527088
-texture = ExtResource("1_ji25y")
+texture = ExtResource("2_11o16")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 0.00249504

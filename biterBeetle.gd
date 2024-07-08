@@ -12,7 +12,7 @@ var isWalking := false
 var walkDirection := Vector2(1,0)
 
 # stuff for jumping
-const jumpPower = 720
+const jumpPower = 500
 const jumpDist = 200
 var jumpTarget
 var isAttacking
@@ -85,7 +85,7 @@ func handleWalk():
 		pass
 
 func die():
-	print ('"noooooo" - ' + get_parent().name + ', last words ' + str(Time.get_datetime_string_from_unix_time(Time.get_unix_time_from_system(), true)))
+	print ('"noooooo" - ' + name + ', last words ' + str(Time.get_datetime_string_from_unix_time(Time.get_unix_time_from_system(), true)))
 	queue_free()
 	
 	# ADD MORE HERE IF NECESSARY, (e.x Respawning mechanics) | thx

@@ -6,6 +6,9 @@ var healthShown:int
 func _ready():
 	health = get_parent().health
 	healthShown = get_parent().health
+	checkHealthFull()
+
+func checkHealthFull():
 	if health == 3:
 		get_parent().get_parent().find_child("healthBar").find_child("healthBarAnimations").play("full")
 

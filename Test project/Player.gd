@@ -14,9 +14,15 @@ var wasOnFloor:bool = false
 var drift = false
 var Targets : Array
 var directionFacing := "right"
+var canUseItem := true
 
 
-var item1 := ""
+var itemName := "" #Path to item (will make modding easier)
+var itemDMG := 0.0
+var itemType := ""
+var itemSpeed := 0.0
+#var itemHitbox := ""
+#Add more item values!
 
 
 func _ready():
@@ -37,9 +43,12 @@ func _physics_process(delta):
 			jump()
 
 	if position.y > 640:
-		reset_local()
+		die()
 
 	# Handle jump.
+	#if Input.is_action_just_released("jump") and velocity.y < 0:
+	#	velocity.y = JUMP_VELOCITY / 3
+	
 	if Input.is_action_just_pressed("jump"):
 		jump()
 	if velocity.y > 0 and Input.is_action_pressed("down"):
@@ -71,14 +80,18 @@ func _physics_process(delta):
 	
 	
 	if Input.is_action_just_pressed("attack"):
-		for Targets in $Melee1.get_overlapping_bodies():
-			var viable = false
-			if Targets != self:
-				for child in Targets.get_children():
-					if child.name == "Damageable":
-						viable = true
-				if viable == true:
-					Targets.find_child("Damageable").getHit(1)
+		if itemType != "":
+			if canUseItem:
+				canUseItem = false
+				get_tree().create_timer(itemSpeed).timeout.connect(itemCooldown)
+				for Targets in $Melee1.get_overlapping_bodies():
+					var viable = false
+					if Targets != self:
+						for child in Targets.get_children():
+							if child.name == "Damageable":
+								viable = true
+						if viable == true:
+							Targets.find_child("Damageable").getHit(itemDMG)
 	
 	move_and_slide()
 
@@ -102,23 +115,41 @@ func bufferTimeout():
 	jumpBuffer = false
 
 func die():
+
+	$Damageable.health = 3
+	$Damageable.checkHealthFull()
 	reset_local()
 
 
 func _on_melee_1_body_entered(body):
-	print ("Entered")
 	for child in body.get_children():
 	#	if child.name == "Targetable":
 		Targets.append(body)
-		print ("Added")
+
 
 
 
 func _on_melee_1_body_exited(body):
-	print ("Exited")
 	if Targets.has(body):
 		Targets.erase(body)
 
-func getItem(item):
-	item1 = item
-	#Drop current item!!!
+func getItem(iname, type, speed, DMG):
+	if itemName != "":
+		var itemLoad = load(itemName)
+		var itemTemp = itemLoad.instantiate()
+		get_parent().add_child(itemTemp)
+		itemTemp.global_position = $".".global_position
+		itemTemp.global_rotation = randf_range(0.2, -0.2)
+		#var itemTemp : PackedScene = load(name).instantiate()
+		#get_parent().add_child(itemTemp)
+		#itemTemp.transform = $".".transform
+	itemName = iname
+	itemType = type
+	itemDMG = DMG
+	itemSpeed = speed
+	# canUseItem = true  <- Caused bug. Needs to be fixed.
+
+	
+func itemCooldown():
+	canUseItem = true
+
