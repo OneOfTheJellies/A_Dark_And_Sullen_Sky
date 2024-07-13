@@ -13,7 +13,7 @@ var dmg = 0
 func _ready():
 	pass
 	
-func getHit(damage):
+func getHit(damage, source):
 	dmg += damage
 	$\"../Label\".display(str(dmg))
 	$\"../AnimationPlayer\".play(\"ouchDummy\")

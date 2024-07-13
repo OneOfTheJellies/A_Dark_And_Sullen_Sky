@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bdbfeqm0w0j6d"]
+[gd_scene load_steps=29 format=3 uid="uid://bdbfeqm0w0j6d"]
 
 [ext_resource type="Script" path="res://biterBeetle.gd" id="1_yxkec"]
 [ext_resource type="Texture2D" uid="uid://dcu3ytnsav703" path="res://Test project/biterBeetle/attack/Biter_beetle_attack8.png" id="2_gcy4q"]
@@ -130,6 +130,22 @@ tracks/0/keys = {
 "values": [ExtResource("6_0eu1u"), ExtResource("7_pomo8"), ExtResource("8_nqhso")]
 }
 
+[sub_resource type="Animation" id="Animation_lpocb"]
+resource_name = "stun"
+length = 0.10001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../biterBeetleSkin:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_mag0j")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l383a"]
 _data = {
 "attack": SubResource("Animation_qpnve"),
@@ -137,6 +153,7 @@ _data = {
 "jumpAttack": SubResource("Animation_p8axv"),
 "jumpCharge": SubResource("Animation_b2lwj"),
 "jumpEnd": SubResource("Animation_7y8cv"),
+"stun": SubResource("Animation_lpocb"),
 "walk": SubResource("Animation_x0int")
 }
 
@@ -191,7 +208,7 @@ polygon = PackedVector2Array(-22, 18, -22, 0, -32, 0, -32, 18)
 [node name="cliffBumper" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="cliffBumper"]
-position = Vector2(-42, 28)
+position = Vector2(-42, 34)
 rotation = -3.14159
 scale = Vector2(0.431116, 0.0736275)
 shape = SubResource("RectangleShape2D_up6tv")
@@ -199,7 +216,7 @@ shape = SubResource("RectangleShape2D_up6tv")
 [node name="cliffBumper2" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="cliffBumper2"]
-position = Vector2(-42, 28)
+position = Vector2(-42, 56)
 rotation = -3.14159
 scale = Vector2(0.431116, 0.0736275)
 shape = SubResource("RectangleShape2D_up6tv")
@@ -207,7 +224,7 @@ shape = SubResource("RectangleShape2D_up6tv")
 [node name="hillBumper" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hillBumper"]
-position = Vector2(-42, -16)
+position = Vector2(-42, -18)
 rotation = -3.14159
 scale = Vector2(0.431116, 0.0736275)
 shape = SubResource("RectangleShape2D_up6tv")
@@ -216,7 +233,7 @@ debug_color = Color(0.670588, 0.0313726, 1, 0.666667)
 [node name="hillBumper2" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hillBumper2"]
-position = Vector2(-42, -39)
+position = Vector2(-42, -40)
 rotation = -3.14159
 scale = Vector2(0.431116, 0.0736275)
 shape = SubResource("RectangleShape2D_up6tv")
