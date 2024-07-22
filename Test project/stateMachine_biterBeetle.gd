@@ -13,7 +13,8 @@ var walkDirection : Vector2
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if target:
-		state = "attack"
+		if !get_node_or_null(target) == null:
+			state = "attack"
 	else:
 		state = "idle"
 	if state == "idle":

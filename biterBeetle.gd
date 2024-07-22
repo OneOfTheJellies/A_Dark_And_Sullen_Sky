@@ -55,7 +55,7 @@ func handleAttack():
 			if viable == true:
 				$biterBeetleAnimations.play("attack",8)
 				isAttacking = false
-				possibleTarget.find_child("Damageable").getHit(1)
+				possibleTarget.find_child("Damageable").getHit(1,self)
 
 func jumpAttack(targetLocation):
 	jumpTarget = targetLocation
