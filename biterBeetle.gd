@@ -3,7 +3,8 @@ extends CharacterBody2D
 
 const speed = 300.0
 const health = 3
-@export var getPhysics : Node
+func getPhysics():
+	return $CharacterPhysics
 
 var firstBeetle = load("res://Test project/biter_beetle.tscn")
 

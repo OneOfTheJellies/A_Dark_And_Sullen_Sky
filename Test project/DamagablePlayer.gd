@@ -12,7 +12,7 @@ func checkHealthFull():
 	if health == 3:
 		get_parent().get_parent().find_child("healthBar").find_child("healthBarAnimations").play("full")
 
-func getHit(damage):
+func getHit(damage, source):
 	health -= damage
 	if health != healthShown:
 		if health < healthShown:

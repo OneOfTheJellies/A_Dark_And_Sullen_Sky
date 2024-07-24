@@ -24,13 +24,11 @@ layer_2/tile_data = PackedInt32Array(327702, 262145, 1)
 [node name="biterBeetle" parent="." instance=ExtResource("1_wjqh1")]
 position = Vector2(284, 138)
 
-[node name="biterBeetle2" parent="." node_paths=PackedStringArray("getPhysics") instance=ExtResource("1_wjqh1")]
+[node name="biterBeetle2" parent="." instance=ExtResource("1_wjqh1")]
 position = Vector2(548, 314)
-getPhysics = NodePath("../biterBeetle/CharacterPhysics")
 
-[node name="biterBeetle3" parent="." node_paths=PackedStringArray("getPhysics") instance=ExtResource("1_wjqh1")]
+[node name="biterBeetle3" parent="." instance=ExtResource("1_wjqh1")]
 position = Vector2(300, 335)
-getPhysics = NodePath("../biterBeetle/CharacterPhysics")
 
 [node name="healthBar" parent="." instance=ExtResource("4_yawo7")]
 

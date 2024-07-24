@@ -12,7 +12,7 @@ var jumpAvailable:bool = false
 var jumpBuffer:bool = false
 var wasOnFloor:bool = false
 var drift = false
-var Targets : Array
+var targets : Array
 var directionFacing := "right"
 var canUseItem := true
 
@@ -124,14 +124,14 @@ func die():
 func _on_melee_1_body_entered(body):
 	for child in body.get_children():
 	#	if child.name == "Targetable":
-		Targets.append(body)
+		targets.append(body)
 
 
 
 
 func _on_melee_1_body_exited(body):
-	if Targets.has(body):
-		Targets.erase(body)
+	if targets.has(body):
+		targets.erase(body)
 
 func getItem(iname, type, speed, DMG):
 	if itemName != "":

@@ -13,8 +13,12 @@ var walkDirection : Vector2
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if target:
-		if !get_node_or_null(target) == null:
+		if is_instance_valid(target):
 			state = "attack"
+		else:
+			possibleTargets.erase(target)
+			target = null
+			state = "idle"
 	else:
 		state = "idle"
 	if state == "idle":
@@ -32,7 +36,7 @@ func idleProcess():
 		get_parent().isWalking = false
 
 func attackProcess():
-	if get_parent().position.distance_to(target.global_position) < get_parent().jumpDist and get_parent().getPhysics.stableFooting == true:
+	if get_parent().position.distance_to(target.global_position) < get_parent().jumpDist and get_parent().getPhysics().stableFooting == true:
 		if lookForSight(target) == true and get_parent().is_on_floor():
 			if !get_parent().find_child("biterBeetleAnimations").current_animation == "attack":
 				get_parent().jumpAttack(target.global_position)
