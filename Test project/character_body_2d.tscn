@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dyce763tpvejl"]
+[gd_scene load_steps=17 format=3 uid="uid://dyce763tpvejl"]
 
 [ext_resource type="Script" path="res://Test project/Player.gd" id="1_ea58r"]
 [ext_resource type="Texture2D" uid="uid://bny38bm0v7rjo" path="res://Player_side_red_cloak_float.png" id="2_akxi7"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dxb0cuvl3fs8m" path="res://Test project/Player_side_red_ cloak_running/Player_side_red_cloak_running4.png" id="5_8nni8"]
 [ext_resource type="Texture2D" uid="uid://tcu1vrtqdecn" path="res://Test project/Player_side_red_ cloak_running/Player_side_red_cloak_running5.png" id="6_boxur"]
 [ext_resource type="Script" path="res://Test project/DamagablePlayer.gd" id="9_vbuxk"]
+[ext_resource type="Script" path="res://Test project/playerPhysics.gd" id="10_gy32d"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p7pfk"]
 radius = 6.0
@@ -103,6 +104,9 @@ shape = SubResource("CircleShape2D_g5qtt")
 libraries = {
 "": SubResource("AnimationLibrary_f4a6m")
 }
+
+[node name="playerPhysics" type="Node" parent="."]
+script = ExtResource("10_gy32d")
 
 [connection signal="body_entered" from="Melee1" to="." method="_on_melee_1_body_entered"]
 [connection signal="body_exited" from="Melee1" to="." method="_on_melee_1_body_exited"]

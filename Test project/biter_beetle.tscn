@@ -112,6 +112,22 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_7y8cv"]
 resource_name = "jumpEnd"
 
+[sub_resource type="Animation" id="Animation_lpocb"]
+resource_name = "stun"
+length = 0.10001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../biterBeetleSkin:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_mag0j")]
+}
+
 [sub_resource type="Animation" id="Animation_x0int"]
 resource_name = "walk"
 length = 0.30001
@@ -130,22 +146,6 @@ tracks/0/keys = {
 "values": [ExtResource("6_0eu1u"), ExtResource("7_pomo8"), ExtResource("8_nqhso")]
 }
 
-[sub_resource type="Animation" id="Animation_lpocb"]
-resource_name = "stun"
-length = 0.10001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../biterBeetleSkin:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("9_mag0j")]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l383a"]
 _data = {
 "attack": SubResource("Animation_qpnve"),
@@ -160,11 +160,10 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_up6tv"]
 size = Vector2(9.27825, 54.3275)
 
-[node name="biterBeetle" type="CharacterBody2D" node_paths=PackedStringArray("getPhysics")]
+[node name="biterBeetle" type="CharacterBody2D"]
 collision_layer = 4
 slide_on_ceiling = false
 script = ExtResource("1_yxkec")
-getPhysics = NodePath("CharacterPhysics")
 
 [node name="biterBeetleSkin" type="Sprite2D" parent="."]
 texture = ExtResource("9_mag0j")
