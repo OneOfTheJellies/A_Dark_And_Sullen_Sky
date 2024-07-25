@@ -55,6 +55,9 @@ func _physics_process(delta):
 		drift = true
 	else:
 		drift = false
+	
+	if Input.is_action_just_released("jump"):
+		jumpCutoff()
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -103,6 +106,10 @@ func jump():
 		jumpBuffer = true
 		get_tree().create_timer(jumpBufferLength).timeout.connect(bufferTimeout)
 	jumpAvailable = false
+	
+func jumpCutoff():
+	if velocity.y < -100:
+		velocity.y = -100
 
 func cyoteTimeout():
 	jumpAvailable = false
