@@ -5,7 +5,6 @@ var healthShown:int
 
 func _ready():
 	health = get_parent().health
-	healthShown = get_parent().health
 	checkHealthFull()
 
 func checkHealthFull():
@@ -18,4 +17,5 @@ func getHit(damage, source):
 		if health < healthShown:
 			get_parent().get_parent().find_child("healthBar").find_child("healthBarAnimations").play("downTo"+str(health))
 			healthShown -= 1
-
+		else:get_parent().get_parent().find_child("healthBar").find_child("healthBarAnimations").play("downTo"+str(health),-1)
+			

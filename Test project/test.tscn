@@ -24,12 +24,6 @@ layer_2/tile_data = PackedInt32Array(327702, 262145, 1)
 [node name="biterBeetle" parent="." instance=ExtResource("1_wjqh1")]
 position = Vector2(284, 138)
 
-[node name="biterBeetle2" parent="." instance=ExtResource("1_wjqh1")]
-position = Vector2(548, 314)
-
-[node name="biterBeetle3" parent="." instance=ExtResource("1_wjqh1")]
-position = Vector2(300, 335)
-
 [node name="healthBar" parent="." instance=ExtResource("4_yawo7")]
 
 [node name="SwordDropped" parent="." instance=ExtResource("5_wl3f0")]

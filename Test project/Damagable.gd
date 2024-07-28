@@ -14,8 +14,8 @@ func getHit(damage, source):
 	print ("oww! I, " + str(get_parent().name) + " got hurt for " + str(damage))
 	get_parent().stun(damage)
 	if get_parent().position.direction_to(source.position).x > 0:
-		get_parent().addVelocity(Vector2(80*damage,-100*damage))
+		get_parent().addVelocity(Vector2(360*damage,-450*damage))
 	else:
-		get_parent().addVelocity(Vector2(-80*damage,-100*damage))
+		get_parent().addVelocity(Vector2(-360*damage,-450*damage))
 	if health <= 0:
 		get_parent().die()

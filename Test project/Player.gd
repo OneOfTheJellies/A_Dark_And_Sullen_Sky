@@ -62,11 +62,14 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("left", "right")
-	if direction:
+	var intendedSpeed = direction * SPEED
+	if direction and ( (intendedSpeed < 0 and velocity.x >= intendedSpeed) or (intendedSpeed > 0 and velocity.x <= intendedSpeed) ):
 		if not drift:
-			velocity.x = direction * SPEED
+			velocity.x += direction * SPEED / 2
 		else: 
-			velocity.x = direction * SPEED / 1.5
+			velocity.x += direction * SPEED / 3
+		if (intendedSpeed < 0 and velocity.x < intendedSpeed) or (intendedSpeed > 0 and velocity.x > intendedSpeed):
+			velocity.x = intendedSpeed
 		$PlayerAnimations.play("walk")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
